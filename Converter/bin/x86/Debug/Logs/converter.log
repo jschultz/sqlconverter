@@ -1,0 +1,968 @@
+DEBUG 2016-05-27 15:39:27,250 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [ReportSearchFolderItems]
+DEBUG 2016-05-27 15:39:27,673 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Role]
+DEBUG 2016-05-27 15:39:28,019 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [NodeReference]
+DEBUG 2016-05-27 15:39:28,374 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Link]
+DEBUG 2016-05-27 15:39:28,707 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Annotation]
+DEBUG 2016-05-27 15:39:29,086 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [CompoundSourceRegion]
+DEBUG 2016-05-27 15:39:29,351 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Query]
+DEBUG 2016-05-27 15:39:29,685 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Project]
+DEBUG 2016-05-27 15:39:30,034 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Matrix]
+DEBUG 2016-05-27 15:39:30,411 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Model]
+DEBUG 2016-05-27 15:39:30,676 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [UserProfile]
+DEBUG 2016-05-27 15:39:31,006 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [LuceneFile]
+DEBUG 2016-05-27 15:39:31,356 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [ExtendedItem]
+DEBUG 2016-05-27 15:39:31,911 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Lock]
+DEBUG 2016-05-27 15:39:32,331 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [UserGroup]
+DEBUG 2016-05-27 15:39:32,680 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Member]
+DEBUG 2016-05-27 15:39:33,007 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Dataset_b3ddccf4-6545-4645-bed2-92a64abb0e4e]
+DEBUG 2016-05-27 15:39:33,338 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [ItemAuthorisation]
+DEBUG 2016-05-27 15:39:33,565 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [EventLog]
+DEBUG 2016-05-27 15:39:33,898 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Category]
+DEBUG 2016-05-27 15:39:34,235 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [SearchFolder]
+DEBUG 2016-05-27 15:39:34,570 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [FrameworkMatrix]
+DEBUG 2016-05-27 15:39:34,919 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Dataset_35d77023-cbf6-45dd-a0cc-e02c7d81b56a]
+DEBUG 2016-05-27 15:39:35,283 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Dataset_76431573-1d89-4816-becc-e28f4497e66e]
+DEBUG 2016-05-27 15:39:35,699 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Style]
+DEBUG 2016-05-27 15:39:36,038 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Source]
+DEBUG 2016-05-27 15:39:36,363 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:837) - parsed table schema for [Item]
+DEBUG 2016-05-27 15:39:36,363 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:841) - finished parsing all tables in SQL Server schema
+DEBUG 2016-05-27 15:39:38,785 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeLDM_Node]
+DEBUG 2016-05-27 15:39:38,787 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeLDM_User]
+DEBUG 2016-05-27 15:39:38,787 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeLDM_AttributeValue]
+DEBUG 2016-05-27 15:39:38,788 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeLDM_IntersectingNode]
+DEBUG 2016-05-27 15:39:38,789 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeLDM_Category]
+DEBUG 2016-05-27 15:39:38,790 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeLDM_Source]
+DEBUG 2016-05-27 15:39:38,790 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeLDM_CodingReference]
+DEBUG 2016-05-27 15:39:38,791 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeLDM_Collection]
+DEBUG 2016-05-27 15:39:38,792 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeCategoriesLDM_Node]
+DEBUG 2016-05-27 15:39:38,797 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeCategoriesLDM_Category]
+DEBUG 2016-05-27 15:39:38,797 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeCategoriesLDM_Attribute]
+DEBUG 2016-05-27 15:39:38,801 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewNodeCategoriesLDM_AttributeValue]
+DEBUG 2016-05-27 15:39:38,802 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewProjectItemsLDM_Project]
+DEBUG 2016-05-27 15:39:38,803 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewProjectItemsLDM_User]
+DEBUG 2016-05-27 15:39:38,804 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewProjectItemsLDM_Folder]
+DEBUG 2016-05-27 15:39:38,978 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewProjectItemsLDM_Collection]
+DEBUG 2016-05-27 15:39:38,978 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewProjectItemsLDM_ProjectItem]
+DEBUG 2016-05-27 15:39:38,979 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceCategoriesLDM_Source]
+DEBUG 2016-05-27 15:39:38,979 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceCategoriesLDM_Category]
+DEBUG 2016-05-27 15:39:38,980 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceCategoriesLDM_Attribute]
+DEBUG 2016-05-27 15:39:38,981 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceCategoriesLDM_AttributeValue]
+DEBUG 2016-05-27 15:39:38,982 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceLDM_Source]
+DEBUG 2016-05-27 15:39:38,983 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceLDM_Node]
+DEBUG 2016-05-27 15:39:38,983 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceLDM_User]
+DEBUG 2016-05-27 15:39:38,984 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceLDM_CodingReference]
+DEBUG 2016-05-27 15:39:39,165 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceLDM_Category]
+DEBUG 2016-05-27 15:39:39,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceLDM_AttributeValue]
+DEBUG 2016-05-27 15:39:39,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:883) - parsed view schema for [viewSourceLDM_Collection]
+DEBUG 2016-05-27 15:39:39,177 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:461) - Creating SQLite database...
+DEBUG 2016-05-27 15:39:39,179 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:466) - SQLite file was created successfully at [C:\Windows\Temp\test.db]
+DEBUG 2016-05-27 15:39:39,213 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,213 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,215 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:39,215 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [ReportSearchFolderItems] (
+	[Id]	integer NOT NULL,
+	[SearchFolderId]	guid NOT NULL,
+	[ProjectItemId]	guid NOT NULL,
+    PRIMARY KEY ([Id])
+
+);
+
+
+
+DEBUG 2016-05-27 15:39:39,401 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [ReportSearchFolderItems]
+DEBUG 2016-05-27 15:39:39,401 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,401 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,401 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,402 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:39,403 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Role] (
+	[Item1_Id]	guid NOT NULL,
+	[TypeId]	integer NOT NULL,
+	[Item2_Id]	guid NOT NULL,
+	[Tag]	integer,
+    PRIMARY KEY ([TypeId], [Item1_Id], [Item2_Id])
+,
+    FOREIGN KEY ([Item1_Id])
+        REFERENCES [Item]([Id]),
+    FOREIGN KEY ([Item2_Id])
+        REFERENCES [Item]([Id])
+);
+CREATE INDEX [Role_Role_Index1]
+ON [Role]
+([TypeId] DESC, [Item2_Id] DESC);
+
+
+
+DEBUG 2016-05-27 15:39:39,506 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Role]
+DEBUG 2016-05-27 15:39:39,507 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,540 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,727 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,727 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,727 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,728 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,728 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:39,728 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:39,728 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [NodeReference] (
+	[Id]	guid NOT NULL,
+	[Node_Item_Id]	guid NOT NULL,
+	[Source_Item_Id]	guid NOT NULL,
+	[CompoundSourceRegion_Id]	guid,
+	[ReferenceTypeId]	integer NOT NULL,
+	[StartZ]	integer,
+	[StartX]	integer NOT NULL,
+	[LengthX]	integer NOT NULL,
+	[EndX]	integer,
+	[StartY]	integer,
+	[LengthY]	integer,
+	[EndY]	integer,
+	[ClusterId]	integer,
+	[CreatedDate]	datetime NOT NULL,
+	[ModifiedDate]	datetime NOT NULL,
+	[CreatedBy]	guid NOT NULL,
+	[ModifiedBy]	guid NOT NULL,
+	[OfX]	integer,
+    PRIMARY KEY ([Id], [Node_Item_Id], [Source_Item_Id])
+,
+    FOREIGN KEY ([Node_Item_Id])
+        REFERENCES [Item]([Id]),
+    FOREIGN KEY ([Source_Item_Id])
+        REFERENCES [CompoundSourceRegion]([Id]),
+    FOREIGN KEY ([Source_Item_Id])
+        REFERENCES [CompoundSourceRegion]([Item_Id]),
+    FOREIGN KEY ([Source_Item_Id])
+        REFERENCES [Item]([Id]),
+    FOREIGN KEY ([CompoundSourceRegion_Id])
+        REFERENCES [CompoundSourceRegion]([Id]),
+    FOREIGN KEY ([CompoundSourceRegion_Id])
+        REFERENCES [CompoundSourceRegion]([Item_Id]),
+    FOREIGN KEY ([CreatedBy])
+        REFERENCES [UserProfile]([Id]),
+    FOREIGN KEY ([ModifiedBy])
+        REFERENCES [UserProfile]([Id])
+);
+CREATE INDEX [NodeReference_NodeReference_Index1]
+ON [NodeReference]
+([Source_Item_Id] DESC, [ReferenceTypeId] DESC);
+CREATE INDEX [NodeReference_NodeReference_Index2]
+ON [NodeReference]
+([Node_Item_Id] DESC, [ReferenceTypeId] DESC);
+
+
+
+DEBUG 2016-05-27 15:39:40,083 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [NodeReference]
+DEBUG 2016-05-27 15:39:40,102 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,102 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,102 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,103 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,103 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,103 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,103 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,103 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,104 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,104 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,104 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,104 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,289 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,289 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,289 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,290 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,290 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,291 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,291 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,291 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,292 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,292 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,292 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,293 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,476 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:40,476 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Link] (
+	[Id]	guid NOT NULL,
+	[Item1_Id]	guid NOT NULL,
+	[Item2_Id]	guid NOT NULL,
+	[CompoundSourceRegion1_Id]	guid,
+	[CompoundSourceRegion2_Id]	guid,
+	[ReferenceTypeId1]	integer NOT NULL,
+	[StartZ1]	integer,
+	[StartX1]	integer NOT NULL,
+	[LengthX1]	integer NOT NULL,
+	[EndX1]	integer,
+	[StartY1]	integer,
+	[LengthY1]	integer,
+	[EndY1]	integer,
+	[ReferenceTypeId2]	integer NOT NULL,
+	[StartZ2]	integer,
+	[StartX2]	integer,
+	[StartY2]	integer,
+	[LengthX2]	integer,
+	[LengthY2]	integer,
+	[EndX2]	integer,
+	[EndY2]	integer,
+	[CreatedDate]	datetime NOT NULL,
+	[ModifiedDate]	datetime NOT NULL,
+	[CreatedBy]	guid NOT NULL,
+	[ModifiedBy]	guid NOT NULL,
+    PRIMARY KEY ([Id], [Item1_Id], [Item2_Id])
+,
+    FOREIGN KEY ([Item1_Id])
+        REFERENCES [CompoundSourceRegion]([Id]),
+    FOREIGN KEY ([Item1_Id])
+        REFERENCES [CompoundSourceRegion]([Item_Id]),
+    FOREIGN KEY ([Item1_Id])
+        REFERENCES [Item]([Id]),
+    FOREIGN KEY ([Item2_Id])
+        REFERENCES [CompoundSourceRegion]([Id]),
+    FOREIGN KEY ([Item2_Id])
+        REFERENCES [CompoundSourceRegion]([Item_Id]),
+    FOREIGN KEY ([Item2_Id])
+        REFERENCES [Item]([Id]),
+    FOREIGN KEY ([CompoundSourceRegion1_Id])
+        REFERENCES [CompoundSourceRegion]([Id]),
+    FOREIGN KEY ([CompoundSourceRegion1_Id])
+        REFERENCES [CompoundSourceRegion]([Item_Id]),
+    FOREIGN KEY ([CompoundSourceRegion2_Id])
+        REFERENCES [CompoundSourceRegion]([Id]),
+    FOREIGN KEY ([CompoundSourceRegion2_Id])
+        REFERENCES [CompoundSourceRegion]([Item_Id]),
+    FOREIGN KEY ([CreatedBy])
+        REFERENCES [UserProfile]([Id]),
+    FOREIGN KEY ([ModifiedBy])
+        REFERENCES [UserProfile]([Id])
+);
+CREATE INDEX [Link_Link_Index1]
+ON [Link]
+([Item2_Id] DESC);
+
+
+
+DEBUG 2016-05-27 15:39:40,749 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Link]
+DEBUG 2016-05-27 15:39:40,851 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,851 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,851 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,852 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,852 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,852 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,853 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,853 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,853 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,854 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,854 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:40,855 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,039 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,039 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,039 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,039 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:41,040 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Annotation] (
+	[Id]	guid NOT NULL,
+	[Item_Id]	guid NOT NULL,
+	[CompoundSourceRegion_Id]	guid,
+	[Text]	nvarchar(1024) NOT NULL,
+	[ReferenceTypeId]	integer NOT NULL,
+	[StartZ]	integer,
+	[StartX]	integer NOT NULL,
+	[LengthX]	integer NOT NULL,
+	[EndX]	integer,
+	[StartY]	integer,
+	[LengthY]	integer,
+	[EndY]	integer,
+	[CreatedDate]	datetime NOT NULL,
+	[ModifiedDate]	datetime NOT NULL,
+	[CreatedBy]	guid NOT NULL,
+	[ModifiedBy]	guid NOT NULL,
+    PRIMARY KEY ([Id], [Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [CompoundSourceRegion]([Id]),
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [CompoundSourceRegion]([Item_Id]),
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id]),
+    FOREIGN KEY ([CompoundSourceRegion_Id])
+        REFERENCES [CompoundSourceRegion]([Id]),
+    FOREIGN KEY ([CompoundSourceRegion_Id])
+        REFERENCES [CompoundSourceRegion]([Item_Id]),
+    FOREIGN KEY ([CreatedBy])
+        REFERENCES [UserProfile]([Id]),
+    FOREIGN KEY ([ModifiedBy])
+        REFERENCES [UserProfile]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:41,252 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Annotation]
+DEBUG 2016-05-27 15:39:41,252 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,252 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,252 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,252 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,252 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,252 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,416 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,417 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:41,603 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [CompoundSourceRegion] (
+	[Id]	guid NOT NULL,
+	[Item_Id]	guid NOT NULL,
+	[OrderId]	integer,
+	[StartX]	integer NOT NULL,
+	[LengthX]	integer NOT NULL,
+	[EndX]	integer,
+	[StartY]	integer,
+	[LengthY]	integer,
+	[EndY]	integer,
+	[Object]	blob,
+	[PlainText]	nvarchar,
+	[PlainTextLength]	integer NOT NULL,
+	[Properties]	varchar,
+	[Entire]	bit NOT NULL,
+	[CreatedDate]	datetime NOT NULL,
+	[ModifiedDate]	datetime NOT NULL,
+	[CreatedBy]	guid NOT NULL,
+	[ModifiedBy]	guid NOT NULL,
+    PRIMARY KEY ([Id], [Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id]),
+    FOREIGN KEY ([CreatedBy])
+        REFERENCES [UserProfile]([Id]),
+    FOREIGN KEY ([ModifiedBy])
+        REFERENCES [UserProfile]([Id])
+);
+CREATE INDEX [CompoundSourceRegion_CompoundSourceRegion_Index1]
+ON [CompoundSourceRegion]
+([Item_Id] DESC);
+
+
+
+DEBUG 2016-05-27 15:39:41,681 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [CompoundSourceRegion]
+DEBUG 2016-05-27 15:39:41,790 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,790 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:41,790 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Query] (
+	[Item_Id]	guid NOT NULL,
+	[Options]	varchar NOT NULL,
+    PRIMARY KEY ([Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:41,885 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Query]
+DEBUG 2016-05-27 15:39:41,885 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,885 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,886 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,886 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,886 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,886 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,977 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,977 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,977 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,978 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,978 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,978 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,978 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,978 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,979 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,979 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,979 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:41,979 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,165 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,165 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,165 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [(0)] AFTER [0]
+DEBUG 2016-05-27 15:39:42,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [(1)] AFTER [1]
+DEBUG 2016-05-27 15:39:42,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [(1)] AFTER [1]
+DEBUG 2016-05-27 15:39:42,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [(1)] AFTER [1]
+DEBUG 2016-05-27 15:39:42,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [(1)] AFTER [1]
+DEBUG 2016-05-27 15:39:42,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [(1)] AFTER [1]
+DEBUG 2016-05-27 15:39:42,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [(1)] AFTER [1]
+DEBUG 2016-05-27 15:39:42,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [(1)] AFTER [1]
+ INFO 2016-05-27 15:39:42,167 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Project] (
+	[Title]	nvarchar(256) NOT NULL,
+	[Description]	nvarchar(512) NOT NULL,
+	[CreatedDate]	datetime NOT NULL,
+	[ModifiedDate]	datetime NOT NULL,
+	[CreatedBy]	guid NOT NULL,
+	[ModifiedBy]	guid NOT NULL,
+	[ReadPassword]	nvarchar(32) NOT NULL,
+	[WritePassword]	nvarchar(32) NOT NULL,
+	[ReadPasswordHint]	nvarchar(64) NOT NULL,
+	[WritePasswordHint]	nvarchar(64) NOT NULL,
+	[Version]	nvarchar(16) NOT NULL,
+	[CasebookLayout]	varchar,
+	[UnassignedLabel]	nvarchar(64) NOT NULL,
+	[NotApplicableLabel]	nvarchar(64) NOT NULL,
+	[IndexLanguage]	integer NOT NULL,
+	[EmbedSources]	bit NOT NULL,
+	[EmbeddedFileSizeLimitBytes]	integer NOT NULL,
+	[Id]	guid NOT NULL,
+	[AllowGuestAccess]	bit NOT NULL,
+	[EventLogging]	bit NOT NULL,
+	[UserColors]	bit NOT NULL DEFAULT 0,
+	[StopWords]	varchar,
+	[DateOfBirth]	bit NOT NULL DEFAULT 1,
+	[Gender]	bit NOT NULL DEFAULT 1,
+	[Religion]	bit NOT NULL DEFAULT 1,
+	[Location]	bit NOT NULL DEFAULT 1,
+	[RelationshipStatus]	bit NOT NULL DEFAULT 1,
+	[Bio]	bit NOT NULL DEFAULT 1,
+	[Web]	bit NOT NULL DEFAULT 1,
+    PRIMARY KEY ([Id])
+,
+    FOREIGN KEY ([CreatedBy])
+        REFERENCES [UserProfile]([Id]),
+    FOREIGN KEY ([ModifiedBy])
+        REFERENCES [UserProfile]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:42,570 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Project]
+DEBUG 2016-05-27 15:39:42,571 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,571 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,571 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:42,571 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Matrix] (
+	[Item_Id]	guid NOT NULL,
+	[Options]	varchar NOT NULL,
+	[Layout]	varchar NOT NULL,
+    PRIMARY KEY ([Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:42,618 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Matrix]
+DEBUG 2016-05-27 15:39:42,618 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,618 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,727 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:42,727 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Model] (
+	[Item_Id]	guid NOT NULL,
+	[Model]	varchar NOT NULL,
+	[Groups]	varchar,
+    PRIMARY KEY ([Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:42,788 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Model]
+DEBUG 2016-05-27 15:39:42,788 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,788 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,788 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,788 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,788 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:42,788 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [UserProfile] (
+	[Id]	guid NOT NULL,
+	[Initials]	nvarchar(16) NOT NULL,
+	[Name]	nvarchar(64) NOT NULL,
+	[AccountName]	nvarchar(256),
+	[ColorArgb]	integer,
+    PRIMARY KEY ([Id])
+
+);
+
+
+
+DEBUG 2016-05-27 15:39:42,942 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [UserProfile]
+DEBUG 2016-05-27 15:39:42,942 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,942 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,942 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,942 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,942 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:42,943 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:42,943 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [LuceneFile] (
+	[Instance]	integer NOT NULL,
+	[Name]	nvarchar(256) NOT NULL,
+	[Length]	integer NOT NULL,
+	[ModifiedDate]	datetime NOT NULL,
+	[ReaderCount]	integer NOT NULL,
+	[Data]	blob NOT NULL,
+    PRIMARY KEY ([Instance], [Name])
+
+);
+
+
+
+DEBUG 2016-05-27 15:39:43,130 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [LuceneFile]
+DEBUG 2016-05-27 15:39:43,130 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,130 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:43,130 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [ExtendedItem] (
+	[Item_Id]	guid NOT NULL,
+	[Properties]	varchar NOT NULL,
+    PRIMARY KEY ([Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:43,197 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [ExtendedItem]
+DEBUG 2016-05-27 15:39:43,197 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,198 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,198 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:43,199 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Lock] (
+	[Item_Id]	guid NOT NULL,
+	[LockedBy]	guid NOT NULL,
+	[Exclusive]	bit NOT NULL,
+    PRIMARY KEY ([Item_Id], [LockedBy])
+,
+    FOREIGN KEY ([LockedBy])
+        REFERENCES [UserProfile]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:43,360 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Lock]
+DEBUG 2016-05-27 15:39:43,360 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,360 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,360 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:43,360 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [UserGroup] (
+	[Id]	guid NOT NULL,
+	[Name]	nvarchar(256) NOT NULL,
+	[Description]	nvarchar(256),
+    PRIMARY KEY ([Id])
+
+);
+
+
+
+DEBUG 2016-05-27 15:39:43,428 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [UserGroup]
+DEBUG 2016-05-27 15:39:43,429 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,429 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,429 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:43,477 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Member] (
+	[Id]	guid NOT NULL,
+	[GroupId]	guid NOT NULL,
+	[Principal]	nvarchar(256) NOT NULL,
+    PRIMARY KEY ([Id])
+,
+    FOREIGN KEY ([GroupId])
+        REFERENCES [UserGroup]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:43,564 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Member]
+DEBUG 2016-05-27 15:39:43,565 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,565 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,565 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,565 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,566 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,566 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,566 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,566 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,665 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,665 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,665 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,665 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,665 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,666 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,666 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,666 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,667 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:43,667 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Dataset_b3ddccf4-6545-4645-bed2-92a64abb0e4e] (
+	[RowId]	integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[Column0]	nvarchar(255),
+	[Column1]	nvarchar(255),
+	[Column2]	nvarchar,
+	[Column3]	datetime,
+	[Column4]	nvarchar(255),
+	[Column5]	nvarchar(255),
+	[Column6]	nvarchar(255),
+	[Column7]	nvarchar(255),
+	[Column8]	nvarchar(255),
+	[Column9]	nvarchar(255),
+	[Column10]	nvarchar(255),
+	[Column11]	nvarchar(255),
+	[Column12]	nvarchar(255),
+	[Column13]	integer,
+	[Column14]	integer,
+	[Column15]	integer
+
+);
+
+
+
+DEBUG 2016-05-27 15:39:43,947 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Dataset_b3ddccf4-6545-4645-bed2-92a64abb0e4e]
+DEBUG 2016-05-27 15:39:43,947 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,948 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,948 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,948 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,949 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:43,949 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,039 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:44,039 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [ItemAuthorisation] (
+	[Id]	guid NOT NULL,
+	[Item_Id]	guid NOT NULL,
+	[Principal]	nvarchar(256) NOT NULL,
+	[AllowRead]	bit NOT NULL,
+	[AllowWrite]	bit NOT NULL,
+	[DenyRead]	bit NOT NULL,
+	[DenyWrite]	bit NOT NULL,
+    PRIMARY KEY ([Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:44,125 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [ItemAuthorisation]
+DEBUG 2016-05-27 15:39:44,126 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,126 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,126 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,127 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,127 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,127 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,227 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,228 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,228 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:44,228 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [EventLog] (
+	[Id]	guid NOT NULL,
+	[CreatedDate]	datetime NOT NULL,
+	[ItemType]	integer NOT NULL,
+	[ItemHierarchicalName]	nvarchar,
+	[EventType]	integer NOT NULL,
+	[EventDetailType]	integer NOT NULL,
+	[IsUndo]	bit NOT NULL,
+	[RelatedItemHierarchicalName]	nvarchar,
+	[UserName]	nvarchar(256) NOT NULL,
+    PRIMARY KEY ([Id])
+
+);
+
+
+
+DEBUG 2016-05-27 15:39:44,560 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [EventLog]
+DEBUG 2016-05-27 15:39:44,560 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,561 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:44,561 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Category] (
+	[Item_Id]	guid NOT NULL,
+	[Layout]	varchar NOT NULL,
+    PRIMARY KEY ([Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:44,605 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Category]
+DEBUG 2016-05-27 15:39:44,605 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,605 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:44,606 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [SearchFolder] (
+	[Item_Id]	guid NOT NULL,
+	[Criteria]	varchar NOT NULL,
+    PRIMARY KEY ([Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:44,658 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [SearchFolder]
+DEBUG 2016-05-27 15:39:44,658 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,658 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:44,659 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [FrameworkMatrix] (
+	[Item_Id]	guid NOT NULL,
+	[Layout]	varchar NOT NULL,
+    PRIMARY KEY ([Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:44,714 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [FrameworkMatrix]
+DEBUG 2016-05-27 15:39:44,789 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,789 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,790 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,790 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,790 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,791 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,791 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:44,791 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:44,791 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Dataset_35d77023-cbf6-45dd-a0cc-e02c7d81b56a] (
+	[RowId]	integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[Column0]	nvarchar(255),
+	[Column1]	integer,
+	[Column2]	integer,
+	[Column3]	numeric,
+	[Column4]	integer,
+	[Column5]	nvarchar,
+	[Column6]	guid
+
+);
+
+
+
+DEBUG 2016-05-27 15:39:45,065 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Dataset_35d77023-cbf6-45dd-a0cc-e02c7d81b56a]
+DEBUG 2016-05-27 15:39:45,065 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,065 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,067 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,067 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,067 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,067 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,067 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,067 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,067 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,067 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,163 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,163 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,164 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,164 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,165 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,165 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,165 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:45,166 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Dataset_76431573-1d89-4816-becc-e28f4497e66e] (
+	[RowId]	integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[Column0]	nvarchar(255),
+	[Column1]	datetime,
+	[Column2]	nvarchar(255),
+	[Column3]	nvarchar(255),
+	[Column4]	nvarchar(255),
+	[Column5]	bit,
+	[Column6]	bit,
+	[Column7]	nvarchar(255),
+	[Column8]	nvarchar(255),
+	[Column9]	nvarchar,
+	[Column10]	nvarchar,
+	[Column11]	nvarchar,
+	[Column12]	nvarchar,
+	[Column13]	nvarchar,
+	[Column14]	integer,
+	[Column15]	nvarchar(255),
+	[Column16]	nvarchar(255)
+
+);
+
+
+
+DEBUG 2016-05-27 15:39:45,385 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Dataset_76431573-1d89-4816-becc-e28f4497e66e]
+DEBUG 2016-05-27 15:39:45,385 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,386 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,386 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,386 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,386 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,386 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,386 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,386 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,538 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,538 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,539 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,539 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,540 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,540 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,540 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,541 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:45,542 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Style] (
+	[Id]	guid NOT NULL,
+	[TypeId]	integer NOT NULL,
+	[Name]	nvarchar(64) NOT NULL,
+	[System]	bit NOT NULL,
+	[FontName]	nvarchar(64) NOT NULL,
+	[FontSize]	integer NOT NULL,
+	[FontColorArgb]	integer NOT NULL,
+	[FontColorEnum]	integer NOT NULL,
+	[Bold]	bit NOT NULL,
+	[Italic]	bit NOT NULL,
+	[Underline]	bit NOT NULL,
+	[LineStyle]	integer,
+	[LineWeight]	integer,
+	[LineColorArgb]	integer,
+	[LineColorEnum]	integer,
+	[FillColorArgb]	integer,
+	[FillColorEnum]	integer,
+    PRIMARY KEY ([Id])
+
+);
+
+
+
+DEBUG 2016-05-27 15:39:45,782 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Style]
+DEBUG 2016-05-27 15:39:45,783 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,783 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,783 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,784 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,784 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,784 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,784 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,916 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,916 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,916 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,916 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:45,916 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:45,916 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Source] (
+	[Item_Id]	guid NOT NULL,
+	[TypeId]	integer NOT NULL,
+	[Object]	blob NOT NULL,
+	[PlainText]	nvarchar,
+	[LengthX]	integer NOT NULL,
+	[LengthY]	integer,
+	[MetaData]	varchar,
+	[Thumbnail]	blob,
+	[Waveform]	blob,
+	[Properties]	varchar,
+	[LengthZ]	integer,
+	[ImportProperties]	varchar,
+    PRIMARY KEY ([Item_Id])
+,
+    FOREIGN KEY ([Item_Id])
+        REFERENCES [Item]([Id])
+);
+
+
+
+DEBUG 2016-05-27 15:39:46,007 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Source]
+DEBUG 2016-05-27 15:39:46,103 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,103 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,104 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,104 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,105 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,105 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,105 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,106 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,106 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,106 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,107 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,107 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [(1)] AFTER [1]
+DEBUG 2016-05-27 15:39:46,290 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+DEBUG 2016-05-27 15:39:46,290 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:722) - DEFAULT VALUE BEFORE [] AFTER []
+ INFO 2016-05-27 15:39:46,290 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:574) - 
+
+CREATE TABLE [Item] (
+	[Id]	guid NOT NULL,
+	[TypeId]	integer NOT NULL,
+	[Name]	nvarchar(256) NOT NULL,
+	[Nickname]	nvarchar(64),
+	[Description]	nvarchar(512) NOT NULL,
+	[CreatedDate]	datetime NOT NULL,
+	[ModifiedDate]	datetime NOT NULL,
+	[CreatedBy]	guid NOT NULL,
+	[ModifiedBy]	guid NOT NULL,
+	[System]	bit NOT NULL,
+	[ReadOnly]	bit NOT NULL,
+	[InheritPermissions]	bit NOT NULL DEFAULT 1,
+	[ColorArgb]	integer,
+	[Aggregate]	bit,
+    PRIMARY KEY ([Id])
+,
+    FOREIGN KEY ([CreatedBy])
+        REFERENCES [UserProfile]([Id]),
+    FOREIGN KEY ([ModifiedBy])
+        REFERENCES [UserProfile]([Id])
+);
+CREATE INDEX [Item_Item_Index1]
+ON [Item]
+([TypeId] DESC);
+
+
+
+DEBUG 2016-05-27 15:39:46,369 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:491) - added schema for SQLite table [Item]
+DEBUG 2016-05-27 15:39:46,371 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:519) - finished adding all table/view schemas for SQLite database
+DEBUG 2016-05-27 15:39:46,480 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:133) - preparing to insert tables ...
+DEBUG 2016-05-27 15:39:46,492 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [ReportSearchFolderItems]
+DEBUG 2016-05-27 15:39:47,514 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Role]
+DEBUG 2016-05-27 15:39:49,441 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [NodeReference]
+DEBUG 2016-05-27 15:39:49,552 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Link]
+DEBUG 2016-05-27 15:39:49,650 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Annotation]
+DEBUG 2016-05-27 15:39:49,711 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [CompoundSourceRegion]
+DEBUG 2016-05-27 15:39:49,791 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Query]
+DEBUG 2016-05-27 15:39:49,847 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Project]
+DEBUG 2016-05-27 15:39:49,912 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Matrix]
+DEBUG 2016-05-27 15:39:49,969 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Model]
+DEBUG 2016-05-27 15:39:50,019 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [UserProfile]
+DEBUG 2016-05-27 15:39:50,667 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [LuceneFile]
+DEBUG 2016-05-27 15:39:51,125 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [ExtendedItem]
+DEBUG 2016-05-27 15:39:51,128 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Lock]
+DEBUG 2016-05-27 15:39:51,130 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [UserGroup]
+DEBUG 2016-05-27 15:39:51,133 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Member]
+DEBUG 2016-05-27 15:39:51,235 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Dataset_b3ddccf4-6545-4645-bed2-92a64abb0e4e]
+DEBUG 2016-05-27 15:39:51,240 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [ItemAuthorisation]
+DEBUG 2016-05-27 15:39:51,289 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [EventLog]
+DEBUG 2016-05-27 15:39:51,343 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Category]
+DEBUG 2016-05-27 15:39:51,398 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [SearchFolder]
+DEBUG 2016-05-27 15:39:51,401 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [FrameworkMatrix]
+DEBUG 2016-05-27 15:39:51,453 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Dataset_35d77023-cbf6-45dd-a0cc-e02c7d81b56a]
+DEBUG 2016-05-27 15:39:51,519 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Dataset_76431573-1d89-4816-becc-e28f4497e66e]
+DEBUG 2016-05-27 15:39:51,575 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Style]
+DEBUG 2016-05-27 15:39:57,862 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Source]
+DEBUG 2016-05-27 15:39:58,251 (c:\Users\Jonathan\src\sqlconverter\DbAccess\SqlServerToSQLite.cs:186) - finished inserting all rows for table [Item]

@@ -1,0 +1,6 @@
+C:\Users\Jonathan\src\sqlconverter\DbAccess\bin\x86\Debug\DbAccess.dll
+C:\Users\Jonathan\src\sqlconverter\DbAccess\bin\x86\Debug\DbAccess.pdb
+C:\Users\Jonathan\src\sqlconverter\DbAccess\bin\x86\Debug\log4net.dll
+C:\Users\Jonathan\src\sqlconverter\DbAccess\bin\x86\Debug\System.Data.SQLite.dll
+C:\Users\Jonathan\src\sqlconverter\DbAccess\obj\x86\Debug\DbAccess.dll
+C:\Users\Jonathan\src\sqlconverter\DbAccess\obj\x86\Debug\DbAccess.pdb

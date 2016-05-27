@@ -34,6 +34,18 @@ namespace Converter
             lblMessage.Text = string.Empty;
         }
 
+        private void btnBrowseMSSQLPath_Click(object sender, EventArgs e)
+        {
+            DialogResult res = openFileDialog1.ShowDialog(this);
+            if (res == DialogResult.Cancel)
+                return;
+
+            string fpath = openFileDialog1.FileName;
+            txtMSSQLPath.Text = fpath;
+            pbrProgress.Value = 0;
+            lblMessage.Text = string.Empty;
+        }
+
         private void cboDatabases_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateSensitivity();
@@ -57,14 +69,23 @@ namespace Converter
 
                     // Get the names of all DBs in the database server.
                     SqlCommand query = new SqlCommand(@"select distinct [name] from sysdatabases", conn);
+                    bool SqlConverterDatabaseExists = false;
                     using (SqlDataReader reader = query.ExecuteReader())
                     {
                         cboDatabases.Items.Clear();
-                        while (reader.Read())
-                            cboDatabases.Items.Add((string)reader[0]);
+                        while (reader.Read()) {
+                            if ((string)reader[0] == "SqlConverter")
+                                SqlConverterDatabaseExists = true;
+                            else
+                                cboDatabases.Items.Add((string)reader[0]);
+                        }
                         if (cboDatabases.Items.Count > 0)
                             cboDatabases.SelectedIndex = 0;
                     } // using
+                    if (SqlConverterDatabaseExists) { 
+                        SqlCommand dropquery = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
+                        dropquery.ExecuteNonQuery();
+                    }
                 } // using
 
                 cboDatabases.Enabled = true;
@@ -145,15 +166,53 @@ namespace Converter
             }
         }
 
+        private void dropSqlConverterDatabase()
+        {
+            if (txtMSSQLPath.Text != string.Empty) {
+                string constr;
+                if (cbxIntegrated.Checked) {
+                    constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master");
+                }
+                else {
+                    constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master", txtUserDB.Text, txtPassDB.Text);
+                }
+                using (SqlConnection conn = new SqlConnection(constr)) {
+                    conn.Open();
+                    SqlCommand query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
+                    query.ExecuteNonQuery();
+                }
+            }
+        }
+
         private void btnStart_Click(object sender, EventArgs e)
         {
         	string sqlConnString;
+            string dbname;
+
+            if (txtMSSQLPath.Text != string.Empty) {
+            	string constr;
+            	if (cbxIntegrated.Checked) {
+            		constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master");
+            	} else {
+            		constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master", txtUserDB.Text, txtPassDB.Text);
+            	}
+                using (SqlConnection conn = new SqlConnection(constr)) {
+                    conn.Open();
+                    SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (FILENAME=N'" + txtMSSQLPath.Text + "') FOR ATTACH", conn);
+                    query.ExecuteNonQuery();
+                    dbname = "SqlConverter";
+                }            
+            }
+            else
+                dbname = (string)cboDatabases.SelectedItem;
+
         	if (cbxIntegrated.Checked) {
-        		sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, (string)cboDatabases.SelectedItem);
+        		sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname);
         	} else {
-        		sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, (string)cboDatabases.SelectedItem, txtUserDB.Text, txtPassDB.Text);
+        		sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname, txtUserDB.Text, txtPassDB.Text);
         	}
             bool createViews = cbxCreateViews.Checked;
+
         	
             string sqlitePath = txtSQLitePath.Text.Trim();
             this.Cursor = Cursors.WaitCursor;
@@ -169,6 +228,7 @@ namespace Converter
                             btnStart.Enabled = true;
                             this.Cursor = Cursors.Default;
                             UpdateSensitivity();
+//                            dropSqlConverterDatabase();
 
                             if (success)
                             {
@@ -253,6 +313,7 @@ namespace Converter
             txtSqlAddress.Enabled = !SqlServerToSQLite.IsActive;
             txtSQLitePath.Enabled = !SqlServerToSQLite.IsActive;
             btnBrowseSQLitePath.Enabled = !SqlServerToSQLite.IsActive;
+            btnBrowseMSSQLPath.Enabled = !SqlServerToSQLite.IsActive;
             cbxEncrypt.Enabled = !SqlServerToSQLite.IsActive;
             cboDatabases.Enabled = cboDatabases.Items.Count > 0 && !SqlServerToSQLite.IsActive;
             txtPassword.Enabled = cbxEncrypt.Checked && cbxEncrypt.Enabled;
@@ -280,5 +341,10 @@ namespace Converter
         #region Private Variables
         private bool _shouldExit = false;
         #endregion        
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
