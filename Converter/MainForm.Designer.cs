@@ -54,6 +54,8 @@ namespace Converter
             this.btnBrowseMSSQLPath = new System.Windows.Forms.Button();
             this.txtMSSQLPath = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.cboInstances = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -71,12 +73,13 @@ namespace Converter
             this.txtSqlAddress.Name = "txtSqlAddress";
             this.txtSqlAddress.Size = new System.Drawing.Size(429, 20);
             this.txtSqlAddress.TabIndex = 1;
+            this.txtSqlAddress.Text = "localhost";
             this.txtSqlAddress.TextChanged += new System.EventHandler(this.txtSqlAddress_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 125);
+            this.label2.Location = new System.Drawing.Point(12, 150);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(135, 13);
             this.label2.TabIndex = 10;
@@ -84,7 +87,7 @@ namespace Converter
             // 
             // txtSQLitePath
             // 
-            this.txtSQLitePath.Location = new System.Drawing.Point(154, 122);
+            this.txtSQLitePath.Location = new System.Drawing.Point(154, 147);
             this.txtSQLitePath.Name = "txtSQLitePath";
             this.txtSQLitePath.Size = new System.Drawing.Size(429, 20);
             this.txtSQLitePath.TabIndex = 11;
@@ -92,7 +95,7 @@ namespace Converter
             // 
             // btnBrowseSQLitePath
             // 
-            this.btnBrowseSQLitePath.Location = new System.Drawing.Point(589, 120);
+            this.btnBrowseSQLitePath.Location = new System.Drawing.Point(589, 145);
             this.btnBrowseSQLitePath.Name = "btnBrowseSQLitePath";
             this.btnBrowseSQLitePath.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseSQLitePath.TabIndex = 12;
@@ -103,7 +106,7 @@ namespace Converter
             // btnStart
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStart.Location = new System.Drawing.Point(365, 236);
+            this.btnStart.Location = new System.Drawing.Point(365, 310);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(198, 23);
             this.btnStart.TabIndex = 17;
@@ -126,7 +129,7 @@ namespace Converter
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 70);
+            this.label3.Location = new System.Drawing.Point(12, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 3;
@@ -137,7 +140,7 @@ namespace Converter
             this.cboDatabases.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDatabases.Enabled = false;
             this.cboDatabases.FormattingEnabled = true;
-            this.cboDatabases.Location = new System.Drawing.Point(154, 67);
+            this.cboDatabases.Location = new System.Drawing.Point(154, 92);
             this.cboDatabases.Name = "cboDatabases";
             this.cboDatabases.Size = new System.Drawing.Size(429, 21);
             this.cboDatabases.TabIndex = 4;
@@ -156,7 +159,7 @@ namespace Converter
             // pbrProgress
             // 
             this.pbrProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbrProgress.Location = new System.Drawing.Point(12, 215);
+            this.pbrProgress.Location = new System.Drawing.Point(12, 289);
             this.pbrProgress.Name = "pbrProgress";
             this.pbrProgress.Size = new System.Drawing.Size(652, 18);
             this.pbrProgress.TabIndex = 16;
@@ -164,7 +167,7 @@ namespace Converter
             // lblMessage
             // 
             this.lblMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblMessage.Location = new System.Drawing.Point(12, 197);
+            this.lblMessage.Location = new System.Drawing.Point(12, 271);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(529, 13);
             this.lblMessage.TabIndex = 15;
@@ -173,7 +176,7 @@ namespace Converter
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.Location = new System.Drawing.Point(569, 236);
+            this.btnCancel.Location = new System.Drawing.Point(569, 310);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(95, 23);
             this.btnCancel.TabIndex = 18;
@@ -184,7 +187,7 @@ namespace Converter
             // cbxEncrypt
             // 
             this.cbxEncrypt.AutoSize = true;
-            this.cbxEncrypt.Location = new System.Drawing.Point(15, 151);
+            this.cbxEncrypt.Location = new System.Drawing.Point(15, 176);
             this.cbxEncrypt.Name = "cbxEncrypt";
             this.cbxEncrypt.Size = new System.Drawing.Size(127, 17);
             this.cbxEncrypt.TabIndex = 13;
@@ -194,7 +197,7 @@ namespace Converter
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(154, 149);
+            this.txtPassword.Location = new System.Drawing.Point(154, 174);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(197, 20);
@@ -205,7 +208,7 @@ namespace Converter
             // 
             this.cbxIntegrated.Checked = true;
             this.cbxIntegrated.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxIntegrated.Location = new System.Drawing.Point(15, 95);
+            this.cbxIntegrated.Location = new System.Drawing.Point(15, 120);
             this.cbxIntegrated.Name = "cbxIntegrated";
             this.cbxIntegrated.Size = new System.Drawing.Size(130, 21);
             this.cbxIntegrated.TabIndex = 5;
@@ -215,7 +218,7 @@ namespace Converter
             // 
             // txtUserDB
             // 
-            this.txtUserDB.Location = new System.Drawing.Point(189, 95);
+            this.txtUserDB.Location = new System.Drawing.Point(189, 120);
             this.txtUserDB.Name = "txtUserDB";
             this.txtUserDB.Size = new System.Drawing.Size(100, 20);
             this.txtUserDB.TabIndex = 7;
@@ -223,7 +226,7 @@ namespace Converter
             // 
             // txtPassDB
             // 
-            this.txtPassDB.Location = new System.Drawing.Point(354, 95);
+            this.txtPassDB.Location = new System.Drawing.Point(354, 120);
             this.txtPassDB.Name = "txtPassDB";
             this.txtPassDB.PasswordChar = '*';
             this.txtPassDB.Size = new System.Drawing.Size(113, 20);
@@ -233,7 +236,7 @@ namespace Converter
             // lblUser
             // 
             this.lblUser.AutoSize = true;
-            this.lblUser.Location = new System.Drawing.Point(151, 98);
+            this.lblUser.Location = new System.Drawing.Point(151, 123);
             this.lblUser.Name = "lblUser";
             this.lblUser.Size = new System.Drawing.Size(32, 13);
             this.lblUser.TabIndex = 6;
@@ -243,7 +246,7 @@ namespace Converter
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(295, 98);
+            this.lblPassword.Location = new System.Drawing.Point(295, 123);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(56, 13);
             this.lblPassword.TabIndex = 8;
@@ -253,7 +256,7 @@ namespace Converter
             // cbxTriggers
             // 
             this.cbxTriggers.AutoSize = true;
-            this.cbxTriggers.Location = new System.Drawing.Point(15, 175);
+            this.cbxTriggers.Location = new System.Drawing.Point(15, 200);
             this.cbxTriggers.Name = "cbxTriggers";
             this.cbxTriggers.Size = new System.Drawing.Size(201, 17);
             this.cbxTriggers.TabIndex = 19;
@@ -263,7 +266,7 @@ namespace Converter
             // cbxCreateViews
             // 
             this.cbxCreateViews.AutoSize = true;
-            this.cbxCreateViews.Location = new System.Drawing.Point(222, 175);
+            this.cbxCreateViews.Location = new System.Drawing.Point(222, 200);
             this.cbxCreateViews.Name = "cbxCreateViews";
             this.cbxCreateViews.Size = new System.Drawing.Size(249, 17);
             this.cbxCreateViews.TabIndex = 20;
@@ -272,7 +275,7 @@ namespace Converter
             // 
             // btnBrowseMSSQLPath
             // 
-            this.btnBrowseMSSQLPath.Location = new System.Drawing.Point(589, 41);
+            this.btnBrowseMSSQLPath.Location = new System.Drawing.Point(589, 66);
             this.btnBrowseMSSQLPath.Name = "btnBrowseMSSQLPath";
             this.btnBrowseMSSQLPath.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseMSSQLPath.TabIndex = 23;
@@ -282,7 +285,7 @@ namespace Converter
             // 
             // txtMSSQLPath
             // 
-            this.txtMSSQLPath.Location = new System.Drawing.Point(154, 43);
+            this.txtMSSQLPath.Location = new System.Drawing.Point(154, 68);
             this.txtMSSQLPath.Name = "txtMSSQLPath";
             this.txtMSSQLPath.Size = new System.Drawing.Size(429, 20);
             this.txtMSSQLPath.TabIndex = 22;
@@ -290,18 +293,39 @@ namespace Converter
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 44);
+            this.label4.Location = new System.Drawing.Point(12, 69);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(133, 13);
             this.label4.TabIndex = 21;
             this.label4.Text = "SQL Server Database File:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
+            // cboInstances
+            // 
+            this.cboInstances.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboInstances.Enabled = false;
+            this.cboInstances.FormattingEnabled = true;
+            this.cboInstances.Location = new System.Drawing.Point(154, 42);
+            this.cboInstances.Name = "cboInstances";
+            this.cboInstances.Size = new System.Drawing.Size(429, 21);
+            this.cboInstances.TabIndex = 25;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(118, 13);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Select Server Instance:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 262);
+            this.ClientSize = new System.Drawing.Size(676, 336);
+            this.Controls.Add(this.cboInstances);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnBrowseMSSQLPath);
             this.Controls.Add(this.txtMSSQLPath);
             this.Controls.Add(this.label4);
@@ -365,6 +389,8 @@ namespace Converter
         private System.Windows.Forms.Button btnBrowseMSSQLPath;
         private System.Windows.Forms.TextBox txtMSSQLPath;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cboInstances;
+        private System.Windows.Forms.Label label5;
     }
 }
 

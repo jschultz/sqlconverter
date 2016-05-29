@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
 using DbAccess;
+//using Microsoft.SqlServer.Management.Smo;
 
 namespace Converter
 {
@@ -114,6 +115,12 @@ namespace Converter
 
             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.Text = "SQL Server To SQLite DB Converter (" + version + ")";
+
+            DataTable dt = SmoApplication.EnumAvailableSqlServers(true);
+            cboInstances.Items.Clear();
+            foreach (System.DatabaseSchema.DataRow dr in dt.Rows) {
+                cboInstances.Items.Add(dr["Name"].ToString());
+            }
         }
 
 		private void txtSqlAddress_TextChanged(object sender, EventArgs e)
