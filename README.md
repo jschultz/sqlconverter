@@ -1,13 +1,14 @@
 # sqlconverter
 
-This code was [originally published by Liron Levi](http://www.codeproject.com/Articles/26932/Convert-SQL-Server-DB-to-SQLite-DB) with the following release notes:
+This code was [originally published by Liron Levi](http://www.codeproject.com/Articles/26932/Convert-SQL-Server-DB-to-SQLite-DB) whose release notes are reproduced below. I moved the source to github in order to facilitate ongoing development.
 
 ### Introduction
 
 I needed to convert the existing SQL server databases to SQLite databases as part of a DB migration program and did not find any decent free converter to do the job.
 
 This is my attempt to solve the problem. I should warn you though that I did not have much time to test it on too many databases. In any case - the source code is very well documented and easy to understand, so if you do have a problem it should be relatively easy to fix. (Please send me the fixed source code. If you do so, I can update the software so that everybody can enjoy it.)
-Using the Code
+
+### Using the Code
 
 The code is split between a dataaccess project (class library) that contains the conversion code itself and a converter project (WinForms) that drives the conversion code and provides a simple UI for user interaction.
 
