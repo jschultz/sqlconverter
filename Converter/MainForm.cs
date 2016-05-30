@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
 using DbAccess;
-//using Microsoft.SqlServer.Management.Smo;
+using Microsoft.SqlServer;
 
 namespace Converter
 {
@@ -34,7 +34,7 @@ namespace Converter
             pbrProgress.Value = 0;
             lblMessage.Text = string.Empty;
         }
-
+        
         private void btnBrowseMSSQLPath_Click(object sender, EventArgs e)
         {
             DialogResult res = openFileDialog1.ShowDialog(this);
@@ -42,9 +42,16 @@ namespace Converter
                 return;
 
             string fpath = openFileDialog1.FileName;
+            cboDatabases.SelectedIndex = 0;
             txtMSSQLPath.Text = fpath;
             pbrProgress.Value = 0;
             lblMessage.Text = string.Empty;
+        }
+
+        private void txtMSSQLPath_TextChanged(object sender, EventArgs e)
+        {
+            if (txtMSSQLPath.Text != string.Empty)
+                txtSQLitePath.Text = Path.ChangeExtension(txtMSSQLPath.Text, ".db");
         }
 
         private void cboDatabases_SelectedIndexChanged(object sender, EventArgs e)
@@ -52,6 +59,13 @@ namespace Converter
             UpdateSensitivity();
             pbrProgress.Value = 0;
             lblMessage.Text = string.Empty;
+            txtMSSQLPath.Text = string.Empty;
+        }
+
+        private void cboInstances_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSqlAddress.Text = cboInstances.SelectedText;
+            btnSet_Click(sender, e);
         }
 
         private void btnSet_Click(object sender, EventArgs e)
@@ -68,13 +82,15 @@ namespace Converter
                 {
                     conn.Open();
 
-                    // Get the names of all DBs in the database server.
-                    SqlCommand query = new SqlCommand(@"select distinct [name] from sysdatabases", conn);
+                    // Get the names of all DBs in the database server. Use filename to work out data file location.
+                    SqlCommand query = new SqlCommand(@"select distinct [name], [filename] from sysdatabases", conn);
                     bool SqlConverterDatabaseExists = false;
                     using (SqlDataReader reader = query.ExecuteReader())
                     {
                         cboDatabases.Items.Clear();
-                        while (reader.Read()) {
+                        cboDatabases.Items.Add((string)"<Use database file>");
+                        while (reader.Read())
+                        {
                             if ((string)reader[0] == "SqlConverter")
                                 SqlConverterDatabaseExists = true;
                             else
@@ -116,11 +132,23 @@ namespace Converter
             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.Text = "SQL Server To SQLite DB Converter (" + version + ")";
 
-            DataTable dt = SmoApplication.EnumAvailableSqlServers(true);
+            DataTable dt = System.Data.Sql.SqlDataSourceEnumerator.Instance.GetDataSources();
             cboInstances.Items.Clear();
-            foreach (System.DatabaseSchema.DataRow dr in dt.Rows) {
-                cboInstances.Items.Add(dr["Name"].ToString());
+            foreach (DataRow dr in dt.Rows)
+            {
+                string InstanceName = dr["InstanceName"].ToString();
+                string ServerName   = dr["ServerName"].ToString();
+                cboInstances.Items.Add(ServerName + '\\' + InstanceName);
             }
+            if (cboInstances.Items.Count > 0)
+            {
+                cboInstances.Enabled = true;
+                txtSqlAddress.Text = (string)cboInstances.Items[0];
+                cboInstances.SelectedIndex = 0;
+                btnSet_Click(sender, e);
+            }
+            else
+                cboInstances.Enabled = false;
         }
 
 		private void txtSqlAddress_TextChanged(object sender, EventArgs e)
@@ -203,9 +231,11 @@ namespace Converter
             	} else {
             		constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master", txtUserDB.Text, txtPassDB.Text);
             	}
+                string DataFile = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtMSSQLPath.Text);
+                System.IO.File.Copy(txtMSSQLPath.Text, DataFile);
                 using (SqlConnection conn = new SqlConnection(constr)) {
                     conn.Open();
-                    SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (FILENAME=N'" + txtMSSQLPath.Text + "') FOR ATTACH", conn);
+                    SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (FILENAME=N'" + DataFile + "') FOR ATTACH", conn);
                     query.ExecuteNonQuery();
                     dbname = "SqlConverter";
                 }            

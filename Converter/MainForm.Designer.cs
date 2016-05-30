@@ -289,6 +289,7 @@ namespace Converter
             this.txtMSSQLPath.Name = "txtMSSQLPath";
             this.txtMSSQLPath.Size = new System.Drawing.Size(429, 20);
             this.txtMSSQLPath.TabIndex = 22;
+            this.txtMSSQLPath.TextChanged += new System.EventHandler(this.txtMSSQLPath_TextChanged);
             // 
             // label4
             // 
