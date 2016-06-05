@@ -968,8 +968,8 @@ namespace DbAccess
                         dataType = "blob";
                     else if (dataType == "xml")
                         dataType = "varchar";
-                    else if (dataType == "uniqueidentifier")
-                        dataType = "guid";
+//                    else if (dataType == "uniqueidentifier")
+//                        dataType = "guid";
                     else if (dataType == "ntext")
                         dataType = "text";
                     else if (dataType == "nchar")

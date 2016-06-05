@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.IO;
 using DbAccess;
 using Microsoft.SqlServer;
@@ -232,7 +234,17 @@ namespace Converter
             		constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master", txtUserDB.Text, txtPassDB.Text);
             	}
                 string DataFile = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtMSSQLPath.Text);
-                System.IO.File.Copy(txtMSSQLPath.Text, DataFile);
+//                string DataFile = Path.GetTempPath() + Path.GetFileName(txtMSSQLPath.Text);
+                System.IO.File.Copy(txtMSSQLPath.Text, DataFile, true);
+
+                File.SetAttributes(DataFile, File.GetAttributes(DataFile) & ~FileAttributes.ReadOnly);
+
+                //FileSecurity sec = File.GetAccessControl(DataFile);
+                //SecurityIdentifier everyone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+                //sec.AddAccessRule(new FileSystemAccessRule("NT SERVICE\\MSSQL$" + Path.GetFileName(txtSqlAddress.Text), FileSystemRights.FullControl, AccessControlType.Allow));
+                //sec.AddAccessRule(new FileSystemAccessRule("NT SERVICE\\MSSQLSERVER", FileSystemRights.FullControl, AccessControlType.Allow));
+                //File.SetAccessControl(DataFile, sec);
+
                 using (SqlConnection conn = new SqlConnection(constr)) {
                     conn.Open();
                     SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (FILENAME=N'" + DataFile + "') FOR ATTACH", conn);
