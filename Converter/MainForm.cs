@@ -7,8 +7,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Security.AccessControl;
-using System.Security.Principal;
 using System.IO;
 using DbAccess;
 using Microsoft.SqlServer;
@@ -215,7 +213,10 @@ namespace Converter
                 }
                 using (SqlConnection conn = new SqlConnection(constr)) {
                     conn.Open();
-                    SqlCommand query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
+                    //  This command forces connections to close. I gave up trying to work out how to close the connection cleanly.
+                    SqlCommand query = new SqlCommand(@"ALTER DATABASE SqlConverter SET SINGLE_USER WITH ROLLBACK IMMEDIATE", conn);
+                    query.ExecuteNonQuery();
+                    query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
                     query.ExecuteNonQuery();
                 }
             }
@@ -238,12 +239,6 @@ namespace Converter
                 System.IO.File.Copy(txtMSSQLPath.Text, DataFile, true);
 
                 File.SetAttributes(DataFile, File.GetAttributes(DataFile) & ~FileAttributes.ReadOnly);
-
-                //FileSecurity sec = File.GetAccessControl(DataFile);
-                //SecurityIdentifier everyone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
-                //sec.AddAccessRule(new FileSystemAccessRule("NT SERVICE\\MSSQL$" + Path.GetFileName(txtSqlAddress.Text), FileSystemRights.FullControl, AccessControlType.Allow));
-                //sec.AddAccessRule(new FileSystemAccessRule("NT SERVICE\\MSSQLSERVER", FileSystemRights.FullControl, AccessControlType.Allow));
-                //File.SetAccessControl(DataFile, sec);
 
                 using (SqlConnection conn = new SqlConnection(constr)) {
                     conn.Open();
@@ -277,7 +272,7 @@ namespace Converter
                             btnStart.Enabled = true;
                             this.Cursor = Cursors.Default;
                             UpdateSensitivity();
-//                            dropSqlConverterDatabase();
+                            dropSqlConverterDatabase();
 
                             if (success)
                             {
