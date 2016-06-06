@@ -51,7 +51,13 @@ namespace Converter
         private void txtMSSQLPath_TextChanged(object sender, EventArgs e)
         {
             if (txtMSSQLPath.Text != string.Empty)
-                txtSQLitePath.Text = Path.ChangeExtension(txtMSSQLPath.Text, ".db");
+                try
+                {
+                    txtSQLitePath.Text = Path.ChangeExtension(txtMSSQLPath.Text, ".db");
+                }
+                catch
+                {
+                };
         }
 
         private void cboDatabases_SelectedIndexChanged(object sender, EventArgs e)
@@ -216,7 +222,8 @@ namespace Converter
                     //  This command forces connections to close. I gave up trying to work out how to close the connection cleanly.
                     SqlCommand query = new SqlCommand(@"ALTER DATABASE SqlConverter SET SINGLE_USER WITH ROLLBACK IMMEDIATE", conn);
                     query.ExecuteNonQuery();
-                    query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
+                    //query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
+                    query = new SqlCommand(@"EXEC sp_detach_db SqlConverter", conn);
                     query.ExecuteNonQuery();
                 }
             }
@@ -338,6 +345,132 @@ namespace Converter
             if (!cbxEncrypt.Checked)
                 password = null;
             SqlServerToSQLite.ConvertSqlServerToSQLiteDatabase(sqlConnString, sqlitePath, password, handler, 
+                selectionHandler, viewFailureHandler, cbxTriggers.Checked, createViews);
+        }
+
+
+        private void btnSQLiteSqlServer_Click(object sender, EventArgs e)
+        {
+            string sqlConnString;
+            string dbname;
+
+            if (txtMSSQLPath.Text != string.Empty)
+            {
+                string constr;
+                if (cbxIntegrated.Checked)
+                {
+                    constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master");
+                }
+                else
+                {
+                    constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master", txtUserDB.Text, txtPassDB.Text);
+                }
+                string DataFile = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtMSSQLPath.Text);
+
+                using (SqlConnection conn = new SqlConnection(constr))
+                {
+                    conn.Open();
+                    SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (NAME=N'" + Path.GetFileNameWithoutExtension(txtMSSQLPath.Text) + "',FILENAME=N'" + DataFile + "')", conn);
+                    query.ExecuteNonQuery();
+                    dbname = "SqlConverter";
+                }
+            }
+            else
+                dbname = (string)cboDatabases.SelectedItem;
+
+            if (cbxIntegrated.Checked)
+            {
+                sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname);
+            }
+            else
+            {
+                sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname, txtUserDB.Text, txtPassDB.Text);
+            }
+            bool createViews = cbxCreateViews.Checked;
+
+
+            string sqlitePath = txtSQLitePath.Text.Trim();
+            this.Cursor = Cursors.WaitCursor;
+            SqlConversionHandler handler = new SqlConversionHandler(delegate(bool done,
+                bool success, int percent, string msg)
+            {
+                Invoke(new MethodInvoker(delegate()
+                {
+                    UpdateSensitivity();
+                    lblMessage.Text = msg;
+                    pbrProgress.Value = percent;
+
+                    if (done)
+                    {
+                        btnSQLiteSqlServer.Enabled = true;
+                        this.Cursor = Cursors.Default;
+                        UpdateSensitivity();
+                        dropSqlConverterDatabase();
+
+                        if (success)
+                        {
+                            MessageBox.Show(this,
+                                msg,
+                                "Conversion Finished",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                            pbrProgress.Value = 0;
+                            lblMessage.Text = string.Empty;
+                        }
+                        else
+                        {
+                            if (!_shouldExit)
+                            {
+                                MessageBox.Show(this,
+                                    msg,
+                                    "Conversion Failed",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                                pbrProgress.Value = 0;
+                                lblMessage.Text = string.Empty;
+                            }
+                            else
+                                Application.Exit();
+                        }
+                    }
+                }));
+            });
+            SqlTableSelectionHandler selectionHandler = new SqlTableSelectionHandler(delegate(List<TableSchema> schema)
+            {
+                List<TableSchema> updated = null;
+                Invoke(new MethodInvoker(delegate
+                {
+                    // Allow the user to select which tables to include by showing him the 
+                    // table selection dialog.
+                    TableSelectionDialog dlg = new TableSelectionDialog();
+                    DialogResult res = dlg.ShowTables(schema, this);
+                    if (res == DialogResult.OK)
+                        updated = dlg.IncludedTables;
+                }));
+                return updated;
+            });
+
+            FailedViewDefinitionHandler viewFailureHandler = new FailedViewDefinitionHandler(delegate(ViewSchema vs)
+            {
+                string updated = null;
+                Invoke(new MethodInvoker(delegate
+                {
+                    ViewFailureDialog dlg = new ViewFailureDialog();
+                    dlg.View = vs;
+                    DialogResult res = dlg.ShowDialog(this);
+                    if (res == DialogResult.OK)
+                        updated = dlg.ViewSQL;
+                    else
+                        updated = null;
+                }));
+
+                return updated;
+            });
+
+            string password = txtPassword.Text.Trim();
+            if (!cbxEncrypt.Checked)
+                password = null;
+            SQLiteToSqlServer.ConvertSQLiteToSqlServerDatabase(sqlConnString, sqlitePath, password, handler,
                 selectionHandler, viewFailureHandler, cbxTriggers.Checked, createViews);
         }
 

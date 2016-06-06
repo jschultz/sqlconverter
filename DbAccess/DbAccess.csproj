@@ -104,6 +104,7 @@
     <Compile Include="DatabaseSchema.cs" />
     <Compile Include="ForeignKeySchema.cs" />
     <Compile Include="IndexSchema.cs" />
+    <Compile Include="SQLiteToSqlServer.cs" />
     <Compile Include="SqlServerToSQLite.cs" />
     <Compile Include="TableSchema.cs" />
     <Compile Include="TriggerBuilder.cs" />
@@ -137,7 +138,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reset="1" AssemblyVersion="1" AssemblyFileVersion="1" StartDate="20081213" />
+      <UserProperties StartDate="20081213" AssemblyFileVersion="1" AssemblyVersion="1" Reset="1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

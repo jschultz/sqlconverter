@@ -262,14 +262,16 @@ namespace DbAccess
 
                 case DbType.String:
                     if (val is Guid)
-                        return ((Guid)val).ToString();
+                        return ((Guid)val).ToString().ToUpper();
                     break;
 
                 case DbType.Guid:
-                    if (val is string)
-                        return ParseStringAsGuid((string)val);
-                    if (val is byte[])
-                        return ParseBlobAsGuid((byte[])val);
+                    if (!(val is string))
+                        return val.ToString().ToUpper();
+                    //if (val is string)
+                    //    return ParseStringAsGuid((string)val);
+                    //if (val is byte[])
+                    //    return ParseBlobAsGuid((byte[])val);
                     break;
 
                 case DbType.Binary:
@@ -285,36 +287,36 @@ namespace DbAccess
             return val;
         }
 
-        private static Guid ParseBlobAsGuid(byte[] blob)
-        {
-            byte[] data = blob;
-            if (blob.Length > 16)
-            {
-                data = new byte[16];
-                for (int i = 0; i < 16; i++)
-                    data[i] = blob[i];
-            }
-            else if (blob.Length < 16)
-            {
-                data = new byte[16];
-                for (int i = 0; i < blob.Length; i++)
-                    data[i] = blob[i];
-            }
+        //private static Guid ParseBlobAsGuid(byte[] blob)
+        //{
+        //    byte[] data = blob;
+        //    if (blob.Length > 16)
+        //    {
+        //        data = new byte[16];
+        //        for (int i = 0; i < 16; i++)
+        //            data[i] = blob[i];
+        //    }
+        //    else if (blob.Length < 16)
+        //    {
+        //        data = new byte[16];
+        //        for (int i = 0; i < blob.Length; i++)
+        //            data[i] = blob[i];
+        //    }
 
-            return new Guid(data);
-        }
+        //    return new Guid(data);
+        //}
 
-        private static Guid ParseStringAsGuid(string str)
-        {
-            try
-            {
-                return new Guid(str);
-            }
-            catch (Exception ex)
-            {
-                return Guid.Empty;
-            } // catch
-        }
+        //private static Guid ParseStringAsGuid(string str)
+        //{
+        //    try
+        //    {
+        //        return new Guid(str);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Guid.Empty;
+        //    } // catch
+        //}
 
         /// <summary>
         /// Creates a command object needed to insert values into a specific SQLite table.
@@ -415,7 +417,8 @@ namespace DbAccess
             if (cs.ColumnType == "nchar" || cs.ColumnType == "char")
                 return DbType.String;
             if (cs.ColumnType == "uniqueidentifier" || cs.ColumnType == "guid")
-                return DbType.Guid;
+                //return DbType.Guid;
+                return DbType.String;
             if (cs.ColumnType == "xml")
                 return DbType.String;
             if (cs.ColumnType == "sql_variant")

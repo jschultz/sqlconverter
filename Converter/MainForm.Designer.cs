@@ -56,6 +56,7 @@ namespace Converter
             this.label4 = new System.Windows.Forms.Label();
             this.cboInstances = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnSQLiteSqlServer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -110,7 +111,7 @@ namespace Converter
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(198, 23);
             this.btnStart.TabIndex = 17;
-            this.btnStart.Text = "Start The Conversion Process";
+            this.btnStart.Text = "SQL Server -> SQLite";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
@@ -320,11 +321,23 @@ namespace Converter
             this.label5.TabIndex = 24;
             this.label5.Text = "Select Server Instance:";
             // 
+            // btnSQLiteSqlServer
+            // 
+            this.btnSQLiteSqlServer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSQLiteSqlServer.Location = new System.Drawing.Point(161, 310);
+            this.btnSQLiteSqlServer.Name = "btnSQLiteSqlServer";
+            this.btnSQLiteSqlServer.Size = new System.Drawing.Size(198, 23);
+            this.btnSQLiteSqlServer.TabIndex = 26;
+            this.btnSQLiteSqlServer.Text = "SQLite -> SQL Server";
+            this.btnSQLiteSqlServer.UseVisualStyleBackColor = true;
+            this.btnSQLiteSqlServer.Click += new System.EventHandler(this.btnSQLiteSqlServer_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(676, 336);
+            this.Controls.Add(this.btnSQLiteSqlServer);
             this.Controls.Add(this.cboInstances);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnBrowseMSSQLPath);
@@ -392,6 +405,7 @@ namespace Converter
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cboInstances;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnSQLiteSqlServer;
     }
 }
 
