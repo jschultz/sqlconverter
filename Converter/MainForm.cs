@@ -366,6 +366,9 @@ namespace Converter
                     constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master", txtUserDB.Text, txtPassDB.Text);
                 }
                 string DataFile = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtMSSQLPath.Text);
+                DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + "\\TEMP\\");
+                foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtMSSQLPath.Text) + "*"))
+                    file.Delete();
 
                 using (SqlConnection conn = new SqlConnection(constr))
                 {

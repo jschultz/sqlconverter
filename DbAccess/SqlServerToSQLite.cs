@@ -628,8 +628,12 @@ namespace DbAccess
                     ForeignKeySchema foreignKey = ts.ForeignKeys[i];
                     string stmt = string.Format("    FOREIGN KEY ([{0}])\n        REFERENCES [{1}]([{2}])",
                                 foreignKey.ColumnName, foreignKey.ForeignTableName, foreignKey.ForeignColumnName);
-
                     sb.Append(stmt);
+                    if (foreignKey.CascadeOnDelete)
+                        sb.Append(" ON DELETE CASCADE");
+                    if (foreignKey.CascadeOnUpdate)
+                        sb.Append(" ON UPDATE CASCADE");
+
                     if (i < ts.ForeignKeys.Count - 1)
                         sb.Append(",\n");
                 } // for
@@ -1156,6 +1160,7 @@ namespace DbAccess
                 @"  ForeignTableName  = PK.TABLE_NAME, " +
                 @"  ForeignColumnName = PT.COLUMN_NAME, " +
                 @"  DeleteRule = C.DELETE_RULE, " +
+                @"  UpdateRule = C.UPDATE_RULE, " +
                 @"  IsNullable = COL.IS_NULLABLE " +
                 @"FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS C " +
                 @"INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS FK ON C.CONSTRAINT_NAME = FK.CONSTRAINT_NAME " +
@@ -1181,6 +1186,7 @@ namespace DbAccess
                     fkc.ForeignTableName = (string)reader["ForeignTableName"];
                     fkc.ForeignColumnName = (string)reader["ForeignColumnName"];
                     fkc.CascadeOnDelete = (string)reader["DeleteRule"] == "CASCADE";
+                    fkc.CascadeOnUpdate = (string)reader["UpdateRule"] == "CASCADE";
                     fkc.IsNullable = (string)reader["IsNullable"] == "YES";
                     fkc.TableName = ts.TableName;
                     ts.ForeignKeys.Add(fkc);
