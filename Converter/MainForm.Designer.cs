@@ -34,8 +34,8 @@ namespace Converter
             this.txtSQLitePath = new System.Windows.Forms.TextBox();
             this.btnBrowseSQLitePath = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.SQLiteFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.MSSqlFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.label3 = new System.Windows.Forms.Label();
             this.cboDatabases = new System.Windows.Forms.ComboBox();
             this.btnSet = new System.Windows.Forms.Button();
@@ -115,17 +115,19 @@ namespace Converter
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // saveFileDialog1
+            // SQLiteFileDialog
             // 
-            this.saveFileDialog1.DefaultExt = "db";
-            this.saveFileDialog1.Filter = "SQLite Files|*.db|All Files|*.*";
-            this.saveFileDialog1.RestoreDirectory = true;
+            this.SQLiteFileDialog.DefaultExt = "db";
+            this.SQLiteFileDialog.CheckPathExists = false;
+            this.SQLiteFileDialog.Filter = "SQLite Files|*.db;*.sqlite|All Files|*.*";
+            this.SQLiteFileDialog.RestoreDirectory = true;
             // 
-            // openFileDialog1
+            // MSSqlFileDialog
             // 
-            this.openFileDialog1.DefaultExt = "mdf";
-            this.openFileDialog1.Filter = "MS SQL Files|*.mdf|All Files|*.*";
-            this.openFileDialog1.RestoreDirectory = true;
+            this.MSSqlFileDialog.DefaultExt = "mdf";
+            this.MSSqlFileDialog.CheckPathExists = false;
+            this.MSSqlFileDialog.Filter = "SQL Server Files|*.mdf|All Files|*.*";
+            this.MSSqlFileDialog.RestoreDirectory = true;
             // 
             // label3
             // 
@@ -388,8 +390,8 @@ namespace Converter
         private System.Windows.Forms.TextBox txtSQLitePath;
         private System.Windows.Forms.Button btnBrowseSQLitePath;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog SQLiteFileDialog;
+        private System.Windows.Forms.OpenFileDialog MSSqlFileDialog;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboDatabases;
         private System.Windows.Forms.Button btnSet;

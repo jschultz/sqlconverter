@@ -25,11 +25,11 @@ namespace Converter
         #region Event Handler
         private void btnBrowseSQLitePath_Click(object sender, EventArgs e)
         {
-            DialogResult res = saveFileDialog1.ShowDialog(this);
+            DialogResult res = SQLiteFileDialog.ShowDialog(this);
             if (res == DialogResult.Cancel)
                 return;
 
-            string fpath = saveFileDialog1.FileName;
+            string fpath = SQLiteFileDialog.FileName;
             txtSQLitePath.Text = fpath;
             pbrProgress.Value = 0;
             lblMessage.Text = string.Empty;
@@ -37,11 +37,11 @@ namespace Converter
         
         private void btnBrowseMSSQLPath_Click(object sender, EventArgs e)
         {
-            DialogResult res = openFileDialog1.ShowDialog(this);
+            DialogResult res = MSSqlFileDialog.ShowDialog(this);
             if (res == DialogResult.Cancel)
                 return;
 
-            string fpath = openFileDialog1.FileName;
+            string fpath = MSSqlFileDialog.FileName;
             cboDatabases.SelectedIndex = 0;
             txtMSSQLPath.Text = fpath;
             pbrProgress.Value = 0;
@@ -50,7 +50,7 @@ namespace Converter
 
         private void txtMSSQLPath_TextChanged(object sender, EventArgs e)
         {
-            if (txtMSSQLPath.Text != string.Empty)
+            if (txtMSSQLPath.Text != string.Empty && txtSQLitePath.Text == string.Empty)
                 try
                 {
                     txtSQLitePath.Text = Path.ChangeExtension(txtMSSQLPath.Text, ".db");
@@ -58,6 +58,7 @@ namespace Converter
                 catch
                 {
                 };
+            UpdateSensitivity();
         }
 
         private void cboDatabases_SelectedIndexChanged(object sender, EventArgs e)
@@ -65,7 +66,6 @@ namespace Converter
             UpdateSensitivity();
             pbrProgress.Value = 0;
             lblMessage.Text = string.Empty;
-            txtMSSQLPath.Text = string.Empty;
         }
 
         private void cboInstances_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,10 +124,19 @@ namespace Converter
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             } // catch
+            UpdateSensitivity();
         }
 
         private void txtSQLitePath_TextChanged(object sender, EventArgs e)
         {
+            if (txtSQLitePath.Text != string.Empty && txtMSSQLPath.Text == string.Empty)
+                try
+                {
+                    txtMSSQLPath.Text = Path.ChangeExtension(txtSQLitePath.Text, ".mdf");
+                }
+                catch
+                {
+                };
             UpdateSensitivity();
         }
 
@@ -148,13 +157,10 @@ namespace Converter
             }
             if (cboInstances.Items.Count > 0)
             {
-                cboInstances.Enabled = true;
                 txtSqlAddress.Text = (string)cboInstances.Items[0];
                 cboInstances.SelectedIndex = 0;
                 btnSet_Click(sender, e);
             }
-            else
-                cboInstances.Enabled = false;
         }
 
 		private void txtSqlAddress_TextChanged(object sender, EventArgs e)
@@ -222,8 +228,8 @@ namespace Converter
                     //  This command forces connections to close. I gave up trying to work out how to close the connection cleanly.
                     SqlCommand query = new SqlCommand(@"ALTER DATABASE SqlConverter SET SINGLE_USER WITH ROLLBACK IMMEDIATE", conn);
                     query.ExecuteNonQuery();
-                    //query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
-                    query = new SqlCommand(@"EXEC sp_detach_db SqlConverter", conn);
+                    query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
+                    //query = new SqlCommand(@"EXEC sp_detach_db SqlConverter", conn);
                     query.ExecuteNonQuery();
                 }
             }
@@ -243,6 +249,10 @@ namespace Converter
             	}
                 string DataFile = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtMSSQLPath.Text);
 //                string DataFile = Path.GetTempPath() + Path.GetFileName(txtMSSQLPath.Text);
+                DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + "\\TEMP\\");
+                foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtMSSQLPath.Text) + "*"))
+                    file.Delete();
+
                 System.IO.File.Copy(txtMSSQLPath.Text, DataFile, true);
 
                 File.SetAttributes(DataFile, File.GetAttributes(DataFile) & ~FileAttributes.ReadOnly);
@@ -412,6 +422,12 @@ namespace Converter
 
                         if (success)
                         {
+                            string DataFile = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtMSSQLPath.Text);
+                            System.IO.File.Copy(DataFile, txtMSSQLPath.Text, true);
+                            DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + "\\TEMP\\");
+                            foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtMSSQLPath.Text) + "*"))
+                                file.Delete();
+
                             MessageBox.Show(this,
                                 msg,
                                 "Conversion Finished",
@@ -482,26 +498,31 @@ namespace Converter
         #region Private Methods
         private void UpdateSensitivity()
         {
-            if (txtSQLitePath.Text.Trim().Length > 0 && cboDatabases.Enabled &&
-                (!cbxEncrypt.Checked || txtPassword.Text.Trim().Length > 0))
-                btnStart.Enabled = true && !SqlServerToSQLite.IsActive;
-            else
-                btnStart.Enabled = false;
+            btnStart.Enabled = txtSQLitePath.Text.Trim().Length > 0 
+                            && cboDatabases.Enabled && (!cbxEncrypt.Checked || txtPassword.Text.Trim().Length > 0)
+                            && (cboDatabases.SelectedIndex == 0 || txtMSSQLPath.Text.Trim().Length > 0)
+                            && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            btnSQLiteSqlServer.Enabled = txtSQLitePath.Text.Trim().Length > 0
+                            && cboDatabases.Enabled && (!cbxEncrypt.Checked || txtPassword.Text.Trim().Length > 0)
+                            && cboDatabases.SelectedIndex == 0 && txtMSSQLPath.Text.Trim().Length > 0 
+                            && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
 
-            btnSet.Enabled = txtSqlAddress.Text.Trim().Length > 0 && !SqlServerToSQLite.IsActive;
+            cboInstances.Enabled = cboInstances.Items.Count > 0 && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            btnSet.Enabled = txtSqlAddress.Text.Trim().Length > 0 && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
             btnCancel.Visible = SqlServerToSQLite.IsActive;
-            txtSqlAddress.Enabled = !SqlServerToSQLite.IsActive;
-            txtSQLitePath.Enabled = !SqlServerToSQLite.IsActive;
-            btnBrowseSQLitePath.Enabled = !SqlServerToSQLite.IsActive;
-            btnBrowseMSSQLPath.Enabled = !SqlServerToSQLite.IsActive;
-            cbxEncrypt.Enabled = !SqlServerToSQLite.IsActive;
-            cboDatabases.Enabled = cboDatabases.Items.Count > 0 && !SqlServerToSQLite.IsActive;
+            txtSqlAddress.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            txtSQLitePath.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            txtMSSQLPath.Enabled = (cboDatabases.SelectedIndex == 0) && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            btnBrowseSQLitePath.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            btnBrowseMSSQLPath.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            cbxEncrypt.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            cboDatabases.Enabled = cboDatabases.Items.Count > 0 && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
             txtPassword.Enabled = cbxEncrypt.Checked && cbxEncrypt.Enabled;
-            cbxIntegrated.Enabled = !SqlServerToSQLite.IsActive;
-            cbxCreateViews.Enabled = !SqlServerToSQLite.IsActive;
-            cbxTriggers.Enabled = !SqlServerToSQLite.IsActive;
-            txtPassDB.Enabled = !SqlServerToSQLite.IsActive;
-            txtUserDB.Enabled = !SqlServerToSQLite.IsActive;
+            cbxIntegrated.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            cbxCreateViews.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            cbxTriggers.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            txtPassDB.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            txtUserDB.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
         }
 
         private static string GetSqlServerConnectionString(string address, string db)
