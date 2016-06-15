@@ -55,7 +55,8 @@ namespace DbAccess
             string sqlitePath, string password, SqlConversionHandler handler,
             SqlTableSelectionHandler selectionHandler,
             FailedViewDefinitionHandler viewFailureHandler,
-            bool createTriggers, bool createViews)
+            bool createTriggers, bool createViews,
+            bool copyStructure, bool copyData)
         {
             // Clear cancelled flag
             _cancelled = false;
@@ -65,7 +66,7 @@ namespace DbAccess
                 try
                 {
                     _isActive = true;
-                    ConvertSqlServerDatabaseToSQLiteFile(sqlServerConnString, sqlitePath, password, handler, selectionHandler, viewFailureHandler, createTriggers, createViews);
+                    ConvertSqlServerDatabaseToSQLiteFile(sqlServerConnString, sqlitePath, password, handler, selectionHandler, viewFailureHandler, createTriggers, createViews, copyStructure, copyData);
                     _isActive = false;
                     handler(true, true, 100, "Finished converting database");
                 }
@@ -95,25 +96,29 @@ namespace DbAccess
             string sqlConnString, string sqlitePath, string password, SqlConversionHandler handler,
             SqlTableSelectionHandler selectionHandler,
             FailedViewDefinitionHandler viewFailureHandler,
-            bool createTriggers, bool createViews)
+            bool createTriggers, bool createViews,
+            bool copyStructure, bool copyData)
         {
-            // Delete the target file if it exists already.
-            if (File.Exists(sqlitePath))
-                File.Delete(sqlitePath);
-
             // Read the schema of the SQL Server database into a memory structure
             DatabaseSchema ds = ReadSqlServerSchema(sqlConnString, handler, selectionHandler);
 
             // Create the SQLite database and apply the schema
-            CreateSQLiteDatabase(sqlitePath, ds, password, handler, viewFailureHandler, createViews);
+            if (copyStructure) {
+                // Delete the target file if it exists already.
+                if (File.Exists(sqlitePath))
+                    File.Delete(sqlitePath);
+
+                CreateSQLiteDatabase(sqlitePath, ds, password, handler, viewFailureHandler, createViews);
+            }
 
             // Copy all rows from SQL Server tables to the newly created SQLite database
-            CopySqlServerRowsToSQLiteDB(sqlConnString, sqlitePath, ds.Tables, password, handler);
+            if (copyData) {
+                CopySqlServerRowsToSQLiteDB(sqlConnString, sqlitePath, ds.Tables, password, handler);
+            }
 
             // Add triggers based on foreign key constraints
-            if (createTriggers)
+            if (createTriggers && copyData)
                 AddTriggersForForeignKeys(sqlitePath, ds.Tables, password, handler);
-
         }
 
         /// <summary>

@@ -35,25 +35,25 @@ namespace Converter
             lblMessage.Text = string.Empty;
         }
         
-        private void btnBrowseMSSQLPath_Click(object sender, EventArgs e)
+        private void btnBrowseSqlServerPath_Click(object sender, EventArgs e)
         {
-            DialogResult res = MSSqlFileDialog.ShowDialog(this);
+            DialogResult res = SqlServerFileDialog.ShowDialog(this);
             if (res == DialogResult.Cancel)
                 return;
 
-            string fpath = MSSqlFileDialog.FileName;
+            string fpath = SqlServerFileDialog.FileName;
             cboDatabases.SelectedIndex = 0;
-            txtMSSQLPath.Text = fpath;
+            txtSqlServerPath.Text = fpath;
             pbrProgress.Value = 0;
             lblMessage.Text = string.Empty;
         }
 
-        private void txtMSSQLPath_TextChanged(object sender, EventArgs e)
+        private void txtSqlServerPath_TextChanged(object sender, EventArgs e)
         {
-            if (txtMSSQLPath.Text != string.Empty && txtSQLitePath.Text == string.Empty)
+            if (txtSqlServerPath.Text != string.Empty && txtSQLitePath.Text == string.Empty)
                 try
                 {
-                    txtSQLitePath.Text = Path.ChangeExtension(txtMSSQLPath.Text, ".db");
+                    txtSQLitePath.Text = Path.ChangeExtension(txtSqlServerPath.Text, ".db");
                 }
                 catch
                 {
@@ -129,10 +129,10 @@ namespace Converter
 
         private void txtSQLitePath_TextChanged(object sender, EventArgs e)
         {
-            if (txtSQLitePath.Text != string.Empty && txtMSSQLPath.Text == string.Empty)
+            if (txtSQLitePath.Text != string.Empty && txtSqlServerPath.Text == string.Empty)
                 try
                 {
-                    txtMSSQLPath.Text = Path.ChangeExtension(txtSQLitePath.Text, ".mdf");
+                    txtSqlServerPath.Text = Path.ChangeExtension(txtSQLitePath.Text, ".mdf");
                 }
                 catch
                 {
@@ -161,6 +161,7 @@ namespace Converter
                 cboInstances.SelectedIndex = 0;
                 btnSet_Click(sender, e);
             }
+            cboWhatToCopy.SelectedIndex = 0;
         }
 
 		private void txtSqlAddress_TextChanged(object sender, EventArgs e)
@@ -215,7 +216,7 @@ namespace Converter
 
         private void dropSqlConverterDatabase()
         {
-            if (txtMSSQLPath.Text != string.Empty) {
+            if (txtSqlServerPath.Text != string.Empty) {
                 string constr;
                 if (cbxIntegrated.Checked) {
                     constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master");
@@ -235,31 +236,37 @@ namespace Converter
             }
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void btnSqlServerSQLite_Click(object sender, EventArgs e)
         {
         	string sqlConnString;
             string dbname;
 
-            if (txtMSSQLPath.Text != string.Empty) {
-            	string constr;
-            	if (cbxIntegrated.Checked) {
-            		constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master");
-            	} else {
-            		constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master", txtUserDB.Text, txtPassDB.Text);
-            	}
-                string DataFile = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtMSSQLPath.Text);
-//                string DataFile = Path.GetTempPath() + Path.GetFileName(txtMSSQLPath.Text);
-                DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + "\\TEMP\\");
-                foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtMSSQLPath.Text) + "*"))
+            if (txtSqlServerPath.Text != string.Empty) {
+                string SqlServerFile = Path.GetFileName(txtSqlServerPath.Text);
+                if (! File.Exists(SqlServerFile)) {
+                    MessageBox.Show("Input file " + SqlServerFile + " not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                string tempFile = Path.GetFileName(Environment.GetEnvironmentVariable("windir") + @"\TEMP\" + txtSqlServerPath.Text);
+                DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + @"\TEMP\");
+                foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
                     file.Delete();
 
-                System.IO.File.Copy(txtMSSQLPath.Text, DataFile, true);
+                System.IO.File.Copy(SqlServerFile, tempFile);
 
-                File.SetAttributes(DataFile, File.GetAttributes(DataFile) & ~FileAttributes.ReadOnly);
+                File.SetAttributes(tempFile, File.GetAttributes(tempFile) & ~FileAttributes.ReadOnly);
 
+                string constr;
+                if (cbxIntegrated.Checked) {
+                    constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master");
+                }
+                else {
+                    constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master", txtUserDB.Text, txtPassDB.Text);
+                }
                 using (SqlConnection conn = new SqlConnection(constr)) {
                     conn.Open();
-                    SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (FILENAME=N'" + DataFile + "') FOR ATTACH", conn);
+                    SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (FILENAME=N'" + tempFile + "') FOR ATTACH", conn);
                     query.ExecuteNonQuery();
                     dbname = "SqlConverter";
                 }            
@@ -267,15 +274,27 @@ namespace Converter
             else
                 dbname = (string)cboDatabases.SelectedItem;
 
-        	if (cbxIntegrated.Checked) {
-        		sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname);
-        	} else {
-        		sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname, txtUserDB.Text, txtPassDB.Text);
-        	}
-            bool createViews = cbxCreateViews.Checked;
+            string SQLitePath = Path.GetFileName(txtSQLitePath.Text);
+            if (cboWhatToCopy.SelectedIndex == 2) {     //  ie if we are copying into an existing database
+                if (!File.Exists(SQLitePath)) {
+                    MessageBox.Show("Output file '" + SQLitePath + "' not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            else {
+                if (File.Exists(SQLitePath)) {
+                    DialogResult result = MessageBox.Show("Replace existing file '" + SQLitePath + "'?", "Confirm replace file", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result != DialogResult.OK)
+                        return;
+                }
+            }
 
-        	
-            string sqlitePath = txtSQLitePath.Text.Trim();
+            if (cbxIntegrated.Checked) {
+                sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname);
+            } else {
+                sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname, txtUserDB.Text, txtPassDB.Text);
+            }
+
             this.Cursor = Cursors.WaitCursor;
             SqlConversionHandler handler = new SqlConversionHandler(delegate(bool done,
                 bool success, int percent, string msg) {
@@ -286,10 +305,9 @@ namespace Converter
 
                         if (done)
                         {
-                            btnStart.Enabled = true;
+                            btnSqlServerSQLite.Enabled = true;
                             this.Cursor = Cursors.Default;
                             UpdateSensitivity();
-                            dropSqlConverterDatabase();
 
                             if (success)
                             {
@@ -354,8 +372,13 @@ namespace Converter
             string password = txtPassword.Text.Trim();
             if (!cbxEncrypt.Checked)
                 password = null;
-            SqlServerToSQLite.ConvertSqlServerToSQLiteDatabase(sqlConnString, sqlitePath, password, handler, 
-                selectionHandler, viewFailureHandler, cbxTriggers.Checked, createViews);
+
+            bool copyStructure = (cboWhatToCopy.SelectedIndex != 2);
+            bool copyData = (cboWhatToCopy.SelectedIndex != 1);
+            SqlServerToSQLite.ConvertSqlServerToSQLiteDatabase(sqlConnString, SQLitePath, password, handler,
+                selectionHandler, viewFailureHandler, cbxTriggers.Checked, cbxCreateViews.Checked, copyStructure, copyData);
+
+            dropSqlConverterDatabase();
         }
 
 
@@ -364,45 +387,66 @@ namespace Converter
             string sqlConnString;
             string dbname;
 
-            if (txtMSSQLPath.Text != string.Empty)
+            string SQLitePath = Path.GetFileName(txtSQLitePath.Text);
+            if (!File.Exists(SQLitePath)) {
+                MessageBox.Show("Input file " + SQLitePath + " not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (txtSqlServerPath.Text != string.Empty)
             {
+                string tempFile = Path.GetFileName(Environment.GetEnvironmentVariable("windir") + @"\TEMP\" + txtSqlServerPath.Text);
+                DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + @"\TEMP\");
+                foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
+                    file.Delete();
+
+                string SqlServerPath = Path.GetFileName(txtSqlServerPath.Text);
+                if (cboWhatToCopy.SelectedIndex == 2) {     //  ie if we are copying into an existing database
+                    if (! File.Exists(SqlServerPath)) {
+                        MessageBox.Show("Output file '" + SqlServerPath + "' not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    System.IO.File.Copy(SqlServerPath, tempFile);
+                }
+                else {
+                    if (File.Exists(SqlServerPath)) {
+                        DialogResult result = MessageBox.Show("Replace existing file '" + SqlServerPath + "'?", "Confirm replace file", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                        if (result != DialogResult.OK)
+                            return;
+                    }
+                }
+
                 string constr;
-                if (cbxIntegrated.Checked)
-                {
+                if (cbxIntegrated.Checked) {
                     constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master");
                 }
-                else
-                {
+                else {
                     constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master", txtUserDB.Text, txtPassDB.Text);
                 }
-                string DataFile = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtMSSQLPath.Text);
-                DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + "\\TEMP\\");
-                foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtMSSQLPath.Text) + "*"))
-                    file.Delete();
 
                 using (SqlConnection conn = new SqlConnection(constr))
                 {
                     conn.Open();
-                    SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (NAME=N'" + Path.GetFileNameWithoutExtension(txtMSSQLPath.Text) + "',FILENAME=N'" + DataFile + "')", conn);
+                    string queryString = "CREATE DATABASE SqlConverter on (NAME=N'" + Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "',FILENAME=N'" + tempFile + "')";
+                    if (cboWhatToCopy.SelectedIndex == 2) {     //  ie if we are copying into an existing database
+                        queryString += " FOR ATTACH";
+                    }
+
+                    SqlCommand query = new SqlCommand(queryString, conn);
                     query.ExecuteNonQuery();
                     dbname = "SqlConverter";
                 }
             }
-            else
+            else {
                 dbname = (string)cboDatabases.SelectedItem;
-
-            if (cbxIntegrated.Checked)
-            {
-                sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname);
             }
-            else
-            {
+
+            if (cbxIntegrated.Checked) {
+                sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname);
+            } else {
                 sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname, txtUserDB.Text, txtPassDB.Text);
             }
-            bool createViews = cbxCreateViews.Checked;
 
-
-            string sqlitePath = txtSQLitePath.Text.Trim();
             this.Cursor = Cursors.WaitCursor;
             SqlConversionHandler handler = new SqlConversionHandler(delegate(bool done,
                 bool success, int percent, string msg)
@@ -418,14 +462,13 @@ namespace Converter
                         btnSQLiteSqlServer.Enabled = true;
                         this.Cursor = Cursors.Default;
                         UpdateSensitivity();
-                        dropSqlConverterDatabase();
 
                         if (success)
                         {
-                            string DataFile = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtMSSQLPath.Text);
-                            System.IO.File.Copy(DataFile, txtMSSQLPath.Text, true);
+                            string SqlServerPath = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtSqlServerPath.Text);
+                            System.IO.File.Copy(SqlServerPath, txtSqlServerPath.Text, true);
                             DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + "\\TEMP\\");
-                            foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtMSSQLPath.Text) + "*"))
+                            foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
                                 file.Delete();
 
                             MessageBox.Show(this,
@@ -489,8 +532,13 @@ namespace Converter
             string password = txtPassword.Text.Trim();
             if (!cbxEncrypt.Checked)
                 password = null;
-            SQLiteToSqlServer.ConvertSQLiteToSqlServerDatabase(sqlConnString, sqlitePath, password, handler,
-                selectionHandler, viewFailureHandler, cbxTriggers.Checked, createViews);
+
+            bool copyStructure = (cboWhatToCopy.SelectedIndex != 2);
+            bool copyData = (cboWhatToCopy.SelectedIndex != 1);
+            SQLiteToSqlServer.ConvertSQLiteToSqlServerDatabase(sqlConnString, SQLitePath, password, handler,
+                selectionHandler, viewFailureHandler, cbxTriggers.Checked, cbxCreateViews.Checked, copyStructure, copyData);
+
+            dropSqlConverterDatabase();
         }
 
         #endregion
@@ -498,13 +546,13 @@ namespace Converter
         #region Private Methods
         private void UpdateSensitivity()
         {
-            btnStart.Enabled = txtSQLitePath.Text.Trim().Length > 0 
+            btnSqlServerSQLite.Enabled = txtSQLitePath.Text.Trim().Length > 0 
                             && cboDatabases.Enabled && (!cbxEncrypt.Checked || txtPassword.Text.Trim().Length > 0)
-                            && (cboDatabases.SelectedIndex == 0 || txtMSSQLPath.Text.Trim().Length > 0)
+                            && (cboDatabases.SelectedIndex > 0 || txtSqlServerPath.Text.Trim().Length > 0)
                             && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
             btnSQLiteSqlServer.Enabled = txtSQLitePath.Text.Trim().Length > 0
                             && cboDatabases.Enabled && (!cbxEncrypt.Checked || txtPassword.Text.Trim().Length > 0)
-                            && cboDatabases.SelectedIndex == 0 && txtMSSQLPath.Text.Trim().Length > 0 
+                            && (cboDatabases.SelectedIndex > 0 || txtSqlServerPath.Text.Trim().Length > 0)
                             && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
 
             cboInstances.Enabled = cboInstances.Items.Count > 0 && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
@@ -512,9 +560,9 @@ namespace Converter
             btnCancel.Visible = SqlServerToSQLite.IsActive;
             txtSqlAddress.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
             txtSQLitePath.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
-            txtMSSQLPath.Enabled = (cboDatabases.SelectedIndex == 0) && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            txtSqlServerPath.Enabled = (cboDatabases.SelectedIndex == 0) && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
             btnBrowseSQLitePath.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
-            btnBrowseMSSQLPath.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
+            btnBrowseSqlServerPath.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
             cbxEncrypt.Enabled = !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
             cboDatabases.Enabled = cboDatabases.Items.Count > 0 && !SqlServerToSQLite.IsActive && !SQLiteToSqlServer.IsActive;
             txtPassword.Enabled = cbxEncrypt.Checked && cbxEncrypt.Enabled;
@@ -544,6 +592,26 @@ namespace Converter
         #endregion        
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbxTriggers_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbxCreateViews_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboWhatToCopy_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
