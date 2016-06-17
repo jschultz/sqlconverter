@@ -135,31 +135,31 @@ namespace DbAccess
             _log.Debug("preparing to insert tables ...");
 
             // Connect to the SQL Server database
-            using (SqlConnection ssconn = new SqlConnection(sqlConnString))
+            using (SqlConnection SqlServerConn = new SqlConnection(sqlConnString))
             {
-                ssconn.Open();
+                SqlServerConn.Open();
 
                 // Connect to the SQLite database next
                 string sqliteConnString = CreateSQLiteConnectionString(sqlitePath, password);
-                using (SQLiteConnection sqconn = new SQLiteConnection(sqliteConnString))
+                using (SQLiteConnection SQLiteConn = new SQLiteConnection(sqliteConnString))
                 {
-                    sqconn.Open();
+                    SQLiteConn.Open();
 
                     // Go over all tables in the schema and copy their rows
                     for (int i = 0; i < schema.Count; i++)
                     {
-                        SqlTransaction tx = ssconn.BeginTransaction();
+                        SqlTransaction tx = SqlServerConn.BeginTransaction();
                         try
                         {
                             string tableQuery = BuildSQLiteTableQuery(schema[i]);
-                            SQLiteCommand query = new SQLiteCommand(tableQuery, sqconn);
+                            SQLiteCommand query = new SQLiteCommand(tableQuery, SQLiteConn);
                             using (SQLiteDataReader reader = query.ExecuteReader())
                             {
                                 SqlCommand insert = BuildSqlServerInsert(schema[i]);
                                 int counter = 0;
                                 while (reader.Read())
                                 {
-                                    insert.Connection = ssconn;
+                                    insert.Connection = SqlServerConn;
                                     insert.Transaction = tx;
                                     List<string> pnames = new List<string>();
                                     for (int j = 0; j < schema[i].Columns.Count; j++)
@@ -176,7 +176,7 @@ namespace DbAccess
                                         tx.Commit();
                                         handler(false, true, (int)(100.0 * i / schema.Count),
                                             "Added " + counter + " rows to table " + schema[i].TableName + " so far");
-                                        tx = ssconn.BeginTransaction();
+                                        tx = SqlServerConn.BeginTransaction();
                                     }
                                 } // while
                             } // using
@@ -195,7 +195,7 @@ namespace DbAccess
                         } // catch
                     }
                 } // using
-                SqlConnection.ClearPool(ssconn);
+                SqlConnection.ClearPool(SqlServerConn);
             } // using
         }
 
@@ -465,9 +465,9 @@ namespace DbAccess
             _log.Debug("Creating SQL Server database...");
 
             // Connect to the newly created database
-            using (SqlConnection conn = new SqlConnection(sqlConnString))
+            using (SqlConnection SqlServerConn = new SqlConnection(sqlConnString))
             {
-                conn.Open();
+                SqlServerConn.Open();
 
                 // Create all tables in the new database
                 int count = 0;
@@ -475,7 +475,7 @@ namespace DbAccess
                 {
                     try
                     {
-                        AddSqlServerTable(conn, dt);
+                        AddSqlServerTable(SqlServerConn, dt);
                     }
                     catch (Exception ex)
                     {
@@ -488,7 +488,7 @@ namespace DbAccess
 
                     _log.Debug("added schema for SQLite table [" + dt.TableName + "]");
                 } // foreach
-                SqlConnection.ClearPool(conn);
+                SqlConnection.ClearPool(SqlServerConn);
             } // using
 
             _log.Debug("finished adding all table/view schemas for SQL Server database");
@@ -499,7 +499,7 @@ namespace DbAccess
         /// </summary>
         /// <param name="conn">The SQLite connection</param>
         /// <param name="dt">The table schema object for the table to be generated.</param>
-        private static void AddSqlServerTable(SqlConnection conn, TableSchema dt)
+        private static void AddSqlServerTable(SqlConnection SqlServerConn, TableSchema dt)
         {
             // Prepare a CREATE TABLE DDL statement
             string stmt = BuildCreateTableQuery(dt);
@@ -507,7 +507,7 @@ namespace DbAccess
             _log.Info("\n\n" + stmt + "\n\n");
 
             // Execute the query in order to actually create the table.
-            SqlCommand cmd = new SqlCommand(stmt, conn);
+            SqlCommand cmd = new SqlCommand(stmt, SqlServerConn);
             cmd.ExecuteNonQuery();
         }
 
@@ -657,16 +657,16 @@ namespace DbAccess
             _log.Debug("Creating SQL Server foreign keys...");
 
             // Connect to the newly created database
-            using (SqlConnection conn = new SqlConnection(sqlConnString))
+            using (SqlConnection SqlServerConn = new SqlConnection(sqlConnString))
             {
-                conn.Open();
+                SqlServerConn.Open();
                 // Create all foreign keys
                 int count = 0;
                 foreach (TableSchema dt in schema.Tables)
                 {
                     try
                     {
-                        AddSqlServerForeignKeys(conn, dt);
+                        AddSqlServerForeignKeys(SqlServerConn, dt);
                     }
                     catch (Exception ex)
                     {
@@ -679,7 +679,7 @@ namespace DbAccess
 
                     _log.Debug("added foreign keys for SQLite table [" + dt.TableName + "]");
                 } // foreach
-                SqlConnection.ClearPool(conn);
+                SqlConnection.ClearPool(SqlServerConn);
             } // using
 
             _log.Debug("finished adding all table/view schemas for SQL Server database");
@@ -692,7 +692,7 @@ namespace DbAccess
         /// </summary>
         /// <param name="conn">The SQLite connection</param>
         /// <param name="dt">The table schema object for the table to be generated.</param>
-        private static void AddSqlServerForeignKeys(SqlConnection conn, TableSchema dt)
+        private static void AddSqlServerForeignKeys(SqlConnection SqlServerConn, TableSchema dt)
         {
             // Prepare a CREATE TABLE DDL statement
             string stmt = BuildCreateForeignKeyQuery(dt);
@@ -702,7 +702,7 @@ namespace DbAccess
             // Execute the query in order to actually create the table.
             if (stmt != null)
             {
-                SqlCommand cmd = new SqlCommand(stmt, conn);
+                SqlCommand cmd = new SqlCommand(stmt, SqlServerConn);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -809,15 +809,15 @@ namespace DbAccess
             // First step is to read the names of all tables in the database
             List<TableSchema> tables = new List<TableSchema>();
             string SQLiteConnString = CreateSQLiteConnectionString(sqlitePath, password);
-            using (SQLiteConnection conn = new SQLiteConnection(SQLiteConnString))
+            using (SQLiteConnection SQLiteConn = new SQLiteConnection(SQLiteConnString))
             {
-                conn.Open();
+                SQLiteConn.Open();
 
                 List<string> tableNames = new List<string>();
 
                 // This command will read the names of all tables in the database
                 // Tables whose name begins 'sqlite_' are internal tables and should be ignored.
-                SQLiteCommand cmd = new SQLiteCommand(@"select * from SQLITE_MASTER WHERE type = 'table' AND name NOT LIKE 'sqlite_%'", conn);
+                SQLiteCommand cmd = new SQLiteCommand(@"select * from SQLITE_MASTER WHERE type = 'table' AND name NOT LIKE 'sqlite_%'", SQLiteConn);
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -829,8 +829,8 @@ namespace DbAccess
                 for (int i = 0; i < tableNames.Count; i++)
                 {
                     string tname = tableNames[i];
-                    TableSchema ts = CreateTableSchema(conn, tname);
-                    CreateForeignKeySchema(conn, ts);
+                    TableSchema ts = CreateTableSchema(SQLiteConn, tname);
+                    CreateForeignKeySchema(SQLiteConn, ts);
                     tables.Add(ts);
                     count++;
                     CheckCancelled();
@@ -875,13 +875,13 @@ namespace DbAccess
         /// <param name="conn">The SQL Server connection to use</param>
         /// <param name="tableName">The name of the table for which we wants to create the table schema.</param>
         /// <returns>A table schema object that represents our knowledge of the table schema</returns>
-        private static TableSchema CreateTableSchema(SQLiteConnection conn, string tableName)
+        private static TableSchema CreateTableSchema(SQLiteConnection SQLiteConn, string tableName)
         {
             TableSchema res = new TableSchema();
             res.TableName = tableName;
             res.Columns = new List<ColumnSchema>();
             ArrayList primaryKey = new ArrayList();
-            SQLiteCommand cmd = new SQLiteCommand(@"PRAGMA table_info('" + tableName + "')", conn);
+            SQLiteCommand cmd = new SQLiteCommand(@"PRAGMA table_info('" + tableName + "')", SQLiteConn);
             using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -989,7 +989,7 @@ namespace DbAccess
             try
             {
                 // Find index information
-                SQLiteCommand cmd3 = new SQLiteCommand(@"PRAGMA index_list ('" + tableName + "')", conn);
+                SQLiteCommand cmd3 = new SQLiteCommand(@"PRAGMA index_list ('" + tableName + "')", SQLiteConn);
                 using (SQLiteDataReader reader = cmd3.ExecuteReader())
                 {
                     res.Indexes = new List<IndexSchema>();
@@ -998,7 +998,7 @@ namespace DbAccess
                         string indexName = (string)reader["name"];
                         bool unique = ((long)reader["unique"] == 1);
                         bool primary = ((string)reader["origin"] == "pk");
-                        IndexSchema index = BuildIndexSchema(indexName, unique, primary, conn);
+                        IndexSchema index = BuildIndexSchema(indexName, unique, primary, SQLiteConn);
                         res.Indexes.Add(index);
                     } // while
                 } // using
@@ -1026,11 +1026,11 @@ namespace DbAccess
         /// </summary>
         /// <param name="conn">The SQL Server connection to use</param>
         /// <param name="ts">The table schema to whom foreign key schema should be added to</param>
-        private static void CreateForeignKeySchema(SQLiteConnection conn, TableSchema ts)
+        private static void CreateForeignKeySchema(SQLiteConnection SQLiteConn, TableSchema ts)
         {
             ts.ForeignKeys = new List<ForeignKeySchema>();
 
-            SQLiteCommand cmd = new SQLiteCommand(@"PRAGMA foreign_key_list('" + ts.TableName + "')", conn);
+            SQLiteCommand cmd = new SQLiteCommand(@"PRAGMA foreign_key_list('" + ts.TableName + "')", SQLiteConn);
 
             using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
@@ -1055,13 +1055,13 @@ namespace DbAccess
         /// <param name="desc">The description of the index</param>
         /// <param name="keys">Key columns that are part of the index.</param>
         /// <returns>An index schema object that represents our knowledge of the index</returns>
-        private static IndexSchema BuildIndexSchema(string indexName, bool unique, bool primary, SQLiteConnection conn)
+        private static IndexSchema BuildIndexSchema(string indexName, bool unique, bool primary, SQLiteConnection SQLiteConn)
         {
             IndexSchema res = new IndexSchema();
             res.IndexName = indexName;
             res.IsUnique = unique;
 
-            SQLiteCommand cmd = new SQLiteCommand(@"PRAGMA index_info('" + indexName + "')", conn);
+            SQLiteCommand cmd = new SQLiteCommand(@"PRAGMA index_info('" + indexName + "')", SQLiteConn);
             using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
                 res.Columns = new List<IndexColumn>();
