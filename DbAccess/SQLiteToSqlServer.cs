@@ -56,7 +56,6 @@ namespace DbAccess
             string sqlitePath, string password, SqlConversionHandler handler,
             SqlTableSelectionHandler selectionHandler,
             FailedViewDefinitionHandler viewFailureHandler,
-            bool createTriggers, bool createViews,
             bool copyStructure, bool copyData)
         {
             // Clear cancelled flag
@@ -67,7 +66,7 @@ namespace DbAccess
                 try
                 {
                     _isActive = true;
-                    ConvertSQLiteToSqlServerDatabaseFile(sqlServerConnString, sqlitePath, password, handler, selectionHandler, viewFailureHandler, createTriggers, createViews, copyStructure, copyData);
+                    ConvertSQLiteToSqlServerDatabaseFile(sqlServerConnString, sqlitePath, password, handler, selectionHandler, viewFailureHandler, copyStructure, copyData);
                     _isActive = false;
                     handler(true, true, 100, "Finished converting database");
                 }
@@ -97,29 +96,26 @@ namespace DbAccess
             string sqlConnString, string sqlitePath, string password, SqlConversionHandler handler,
             SqlTableSelectionHandler selectionHandler,
             FailedViewDefinitionHandler viewFailureHandler,
-            bool createTriggers, bool createViews,
             bool copyStructure, bool copyData)
         {
             // Read the schema of the SQL Server database into a memory structure
             DatabaseSchema ds = ReadSQLiteSchema(sqlitePath, password, handler, selectionHandler);
+            if (ds == null) {
+                CancelConversion();
+                CheckCancelled();
+                return;
+            }
 
             // Create the SQLite database and apply the schema
             if (copyStructure) {
-                CreateSqlServerDatabase(sqlConnString, ds, handler, viewFailureHandler, createViews);
+                CreateSqlServerDatabase(sqlConnString, ds, handler, viewFailureHandler);
+                CreateSqlServerForeignKeys(sqlConnString, ds, handler, viewFailureHandler);
             }
 
             // Copy all rows from SQL Server tables to the newly created SQLite database
             if (copyData) {
                 CopySQLiteRowsToSqlServerDB(sqlitePath, sqlConnString, ds.Tables, password, handler);
             }
-
-            // Create foreign keys after populating database
-            // CreateSqlServerForeignKeys(sqlConnString, ds, handler, viewFailureHandler, createViews);
-
-            // Add triggers based on foreign key constraints
-            if (createTriggers && copyData)
-                AddTriggersForForeignKeys(sqlConnString, ds.Tables, handler);
-
         }
 
         /// <summary>
@@ -199,6 +195,7 @@ namespace DbAccess
                         } // catch
                     }
                 } // using
+                SqlConnection.ClearPool(ssconn);
             } // using
         }
 
@@ -463,7 +460,7 @@ namespace DbAccess
         /// <param name="handler">A handle for progress notifications.</param>
         private static void CreateSqlServerDatabase(string sqlConnString, DatabaseSchema schema, 
             SqlConversionHandler handler,
-            FailedViewDefinitionHandler viewFailureHandler, bool createViews)
+            FailedViewDefinitionHandler viewFailureHandler)
         {
             _log.Debug("Creating SQL Server database...");
 
@@ -491,7 +488,7 @@ namespace DbAccess
 
                     _log.Debug("added schema for SQLite table [" + dt.TableName + "]");
                 } // foreach
-
+                SqlConnection.ClearPool(conn);
             } // using
 
             _log.Debug("finished adding all table/view schemas for SQL Server database");
@@ -655,7 +652,7 @@ namespace DbAccess
 
         private static void CreateSqlServerForeignKeys(string sqlConnString, DatabaseSchema schema,
             SqlConversionHandler handler,
-            FailedViewDefinitionHandler viewFailureHandler, bool createViews)
+            FailedViewDefinitionHandler viewFailureHandler)
         {
             _log.Debug("Creating SQL Server foreign keys...");
 
@@ -682,8 +679,7 @@ namespace DbAccess
 
                     _log.Debug("added foreign keys for SQLite table [" + dt.TableName + "]");
                 } // foreach
-
-
+                SqlConnection.ClearPool(conn);
             } // using
 
             _log.Debug("finished adding all table/view schemas for SQL Server database");
@@ -850,7 +846,9 @@ namespace DbAccess
             if (selectionHandler != null)
             {
                 List<TableSchema> updated = selectionHandler(tables);
-                if (updated != null)
+                if (updated == null)
+                    return null;
+                else
                     tables = updated;
             } // if
 
@@ -1112,57 +1110,6 @@ namespace DbAccess
             return connstring;
         }
         #endregion
-
-        #region Trigger related
-        private static void AddTriggersForForeignKeys(string sqlConnString, IEnumerable<TableSchema> schema,
-            SqlConversionHandler handler)
-        {
-            // Connect to the newly created database
-            using (SqlConnection conn = new SqlConnection(sqlConnString))
-            {
-                conn.Open();
-                // foreach
-                foreach (TableSchema dt in schema)
-                {
-                    try
-                    {
-                        AddTableTriggers(conn, dt);
-                    }
-                    catch (Exception ex)
-                    {
-                        _log.Error("AddTableTriggers failed", ex);
-                        throw;
-                    }
-                }
-
-            } // using
-
-            _log.Debug("finished adding triggers to schema");
-        }
-
-        private static void AddTableTriggers(SqlConnection conn, TableSchema dt)
-        {
-            IList<TriggerSchema> triggers = TriggerBuilder.GetForeignKeyTriggers(dt);
-            foreach (TriggerSchema trigger in triggers)
-            {
-                SqlCommand cmd = new SqlCommand(WriteTriggerSchema(trigger), conn);
-                cmd.ExecuteNonQuery();
-            }
-        }
-        #endregion
-
-        /// <summary>
-        /// Gets a create script for the triggerSchema in sqlite syntax
-        /// </summary>
-        /// <param name="ts">Trigger to script</param>
-        /// <returns>Executable script</returns>
-        public static string WriteTriggerSchema(TriggerSchema ts)
-        {
-            return @"CREATE TRIGGER [" + ts.Name + "] " +
-                   ts.Type + " " + ts.Event +
-                   " ON [" + ts.Table + "] " +
-                   "BEGIN " + ts.Body + " END;";
-        }
 
         #region Private Variables
         private static bool _isActive = false;

@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using DbAccess;
 using Microsoft.SqlServer;
 
@@ -15,6 +17,8 @@ namespace Converter
 {
     public partial class MainForm : Form
     {
+        string tempDirPath = Environment.GetEnvironmentVariable("windir") + @"\TEMP";
+
         #region Constructor
         public MainForm()
         {
@@ -227,10 +231,10 @@ namespace Converter
                 using (SqlConnection conn = new SqlConnection(constr)) {
                     conn.Open();
                     //  This command forces connections to close. I gave up trying to work out how to close the connection cleanly.
-                    SqlCommand query = new SqlCommand(@"ALTER DATABASE SqlConverter SET SINGLE_USER WITH ROLLBACK IMMEDIATE", conn);
-                    query.ExecuteNonQuery();
-                    query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
-                    //query = new SqlCommand(@"EXEC sp_detach_db SqlConverter", conn);
+                    //SqlCommand query = new SqlCommand(@"ALTER DATABASE SqlConverter SET SINGLE_USER WITH ROLLBACK IMMEDIATE", conn);
+                    //query.ExecuteNonQuery();
+                    SqlCommand query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
+                    //SqlCommand query = new SqlCommand(@"EXEC sp_detach_db SqlConverter", conn);
                     query.ExecuteNonQuery();
                 }
             }
@@ -238,24 +242,26 @@ namespace Converter
 
         private void btnSqlServerSQLite_Click(object sender, EventArgs e)
         {
-        	string sqlConnString;
+            string tempFilePath = string.Empty;
+            string SqlServerPath = string.Empty;
+            string sqlConnString;
             string dbname;
+            DirectoryInfo tempDir = new DirectoryInfo(tempDirPath);
 
             if (txtSqlServerPath.Text != string.Empty) {
-                string SqlServerFile = Path.GetFileName(txtSqlServerPath.Text);
-                if (! File.Exists(SqlServerFile)) {
-                    MessageBox.Show("Input file " + SqlServerFile + " not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                SqlServerPath = Path.GetFullPath(txtSqlServerPath.Text);
+                if (! File.Exists(SqlServerPath)) {
+                    MessageBox.Show("Input file " + SqlServerPath + " not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
-                string tempFile = Path.GetFileName(Environment.GetEnvironmentVariable("windir") + @"\TEMP\" + txtSqlServerPath.Text);
-                DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + @"\TEMP\");
-                foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
+                tempFilePath = Path.GetFullPath(tempDirPath + @"\" + Path.GetFileName(txtSqlServerPath.Text));
+                foreach (var file in tempDir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
                     file.Delete();
 
-                System.IO.File.Copy(SqlServerFile, tempFile);
+                System.IO.File.Copy(SqlServerPath, tempFilePath);
 
-                File.SetAttributes(tempFile, File.GetAttributes(tempFile) & ~FileAttributes.ReadOnly);
+                File.SetAttributes(tempFilePath, File.GetAttributes(tempFilePath) & ~FileAttributes.ReadOnly);
 
                 string constr;
                 if (cbxIntegrated.Checked) {
@@ -266,7 +272,7 @@ namespace Converter
                 }
                 using (SqlConnection conn = new SqlConnection(constr)) {
                     conn.Open();
-                    SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (FILENAME=N'" + tempFile + "') FOR ATTACH", conn);
+                    SqlCommand query = new SqlCommand(@"CREATE DATABASE SqlConverter on (FILENAME=N'" + tempFilePath + "') FOR ATTACH", conn);
                     query.ExecuteNonQuery();
                     dbname = "SqlConverter";
                 }            
@@ -274,7 +280,7 @@ namespace Converter
             else
                 dbname = (string)cboDatabases.SelectedItem;
 
-            string SQLitePath = Path.GetFileName(txtSQLitePath.Text);
+            string SQLitePath = Path.GetFullPath(txtSQLitePath.Text);
             if (cboWhatToCopy.SelectedIndex == 2) {     //  ie if we are copying into an existing database
                 if (!File.Exists(SQLitePath)) {
                     MessageBox.Show("Output file '" + SQLitePath + "' not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -305,10 +311,16 @@ namespace Converter
 
                         if (done)
                         {
+                            dropSqlConverterDatabase();
+
                             btnSqlServerSQLite.Enabled = true;
                             this.Cursor = Cursors.Default;
                             UpdateSensitivity();
 
+                            if (txtSqlServerPath.Text != string.Empty) {
+                                foreach (var file in tempDir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
+                                    file.Delete();
+                            }
                             if (success)
                             {
                                 MessageBox.Show(this,
@@ -377,17 +389,18 @@ namespace Converter
             bool copyData = (cboWhatToCopy.SelectedIndex != 1);
             SqlServerToSQLite.ConvertSqlServerToSQLiteDatabase(sqlConnString, SQLitePath, password, handler,
                 selectionHandler, viewFailureHandler, cbxTriggers.Checked, cbxCreateViews.Checked, copyStructure, copyData);
-
-            dropSqlConverterDatabase();
         }
 
 
         private void btnSQLiteSqlServer_Click(object sender, EventArgs e)
         {
+            string tempFilePath = string.Empty;
+            string SqlServerPath = string.Empty;
             string sqlConnString;
             string dbname;
+            DirectoryInfo tempDir = new DirectoryInfo(tempDirPath);
 
-            string SQLitePath = Path.GetFileName(txtSQLitePath.Text);
+            string SQLitePath = Path.GetFullPath(txtSQLitePath.Text);
             if (!File.Exists(SQLitePath)) {
                 MessageBox.Show("Input file " + SQLitePath + " not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -395,18 +408,17 @@ namespace Converter
 
             if (txtSqlServerPath.Text != string.Empty)
             {
-                string tempFile = Path.GetFileName(Environment.GetEnvironmentVariable("windir") + @"\TEMP\" + txtSqlServerPath.Text);
-                DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + @"\TEMP\");
-                foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
+                tempFilePath = Path.GetFullPath(tempDirPath + @"\" + Path.GetFileName(txtSqlServerPath.Text));
+                foreach (var file in tempDir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
                     file.Delete();
 
-                string SqlServerPath = Path.GetFileName(txtSqlServerPath.Text);
+                SqlServerPath = Path.GetFullPath(txtSqlServerPath.Text);
                 if (cboWhatToCopy.SelectedIndex == 2) {     //  ie if we are copying into an existing database
                     if (! File.Exists(SqlServerPath)) {
                         MessageBox.Show("Output file '" + SqlServerPath + "' not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    System.IO.File.Copy(SqlServerPath, tempFile);
+                    System.IO.File.Copy(SqlServerPath, tempFilePath);
                 }
                 else {
                     if (File.Exists(SqlServerPath)) {
@@ -427,7 +439,7 @@ namespace Converter
                 using (SqlConnection conn = new SqlConnection(constr))
                 {
                     conn.Open();
-                    string queryString = "CREATE DATABASE SqlConverter on (NAME=N'" + Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "',FILENAME=N'" + tempFile + "')";
+                    string queryString = "CREATE DATABASE SqlConverter on (NAME=N'" + Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "',FILENAME=N'" + tempFilePath + "')";
                     if (cboWhatToCopy.SelectedIndex == 2) {     //  ie if we are copying into an existing database
                         queryString += " FOR ATTACH";
                     }
@@ -459,18 +471,11 @@ namespace Converter
 
                     if (done)
                     {
-                        btnSQLiteSqlServer.Enabled = true;
-                        this.Cursor = Cursors.Default;
-                        UpdateSensitivity();
-
                         if (success)
                         {
-                            string SqlServerPath = Environment.GetEnvironmentVariable("windir") + "\\TEMP\\" + Path.GetFileName(txtSqlServerPath.Text);
-                            System.IO.File.Copy(SqlServerPath, txtSqlServerPath.Text, true);
-                            DirectoryInfo dir = new DirectoryInfo(Environment.GetEnvironmentVariable("windir") + "\\TEMP\\");
-                            foreach (var file in dir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
-                                file.Delete();
-
+                            if (txtSqlServerPath.Text != string.Empty) {
+                                //System.IO.File.Copy(tempFilePath, SqlServerPath, true);
+                            }
                             MessageBox.Show(this,
                                 msg,
                                 "Conversion Finished",
@@ -494,6 +499,11 @@ namespace Converter
                             else
                                 Application.Exit();
                         }
+                        dropSqlConverterDatabase();
+
+                        btnSQLiteSqlServer.Enabled = true;
+                        this.Cursor = Cursors.Default;
+                        UpdateSensitivity();
                     }
                 }));
             });
@@ -536,9 +546,7 @@ namespace Converter
             bool copyStructure = (cboWhatToCopy.SelectedIndex != 2);
             bool copyData = (cboWhatToCopy.SelectedIndex != 1);
             SQLiteToSqlServer.ConvertSQLiteToSqlServerDatabase(sqlConnString, SQLitePath, password, handler,
-                selectionHandler, viewFailureHandler, cbxTriggers.Checked, cbxCreateViews.Checked, copyStructure, copyData);
-
-            dropSqlConverterDatabase();
+                selectionHandler, viewFailureHandler, copyStructure, copyData);
         }
 
         #endregion
