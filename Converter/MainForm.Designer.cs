@@ -76,7 +76,6 @@ namespace Converter
             this.txtSqlAddress.Name = "txtSqlAddress";
             this.txtSqlAddress.Size = new System.Drawing.Size(429, 20);
             this.txtSqlAddress.TabIndex = 1;
-            this.txtSqlAddress.Text = "localhost";
             this.txtSqlAddress.TextChanged += new System.EventHandler(this.txtSqlAddress_TextChanged);
             // 
             // label2

@@ -12,13 +12,12 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using DbAccess;
 using Microsoft.SqlServer;
+using Microsoft.SqlServer.Management.Smo;
 
 namespace Converter
 {
     public partial class MainForm : Form
     {
-        string tempDirPath = Environment.GetEnvironmentVariable("windir") + @"\TEMP";
-
         #region Constructor
         public MainForm()
         {
@@ -109,8 +108,8 @@ namespace Converter
                         if (cboDatabases.Items.Count > 0)
                             cboDatabases.SelectedIndex = 0;
                     } // using
-                    if (SqlConverterDatabaseExists) { 
-                        SqlCommand dropquery = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
+                    if (SqlConverterDatabaseExists) {
+                        SqlCommand dropquery = new SqlCommand(@"EXEC sp_detach_db SqlConverter", conn);
                         dropquery.ExecuteNonQuery();
                     }
                 } // using
@@ -151,19 +150,47 @@ namespace Converter
             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.Text = "SQL Server To SQLite DB Converter (" + version + ")";
 
-            DataTable dt = System.Data.Sql.SqlDataSourceEnumerator.Instance.GetDataSources();
+            // I've tried various ways of identifying local SQL Server instances here. Apparently
+            // the only way to see them all without relying on the Server Browser (which is not
+            // necessarily active is to use the registry. But the mind-boggling complexity of
+            // Windows registry was too much for me and I gave up.
+
+            //DataTable dt = System.Data.Sql.SqlDataSourceEnumerator.Instance.GetDataSources();
+            //cboInstances.Items.Clear();
+            //foreach (DataRow dr in dt.Rows)
+            //{
+            //    string InstanceName = dr["InstanceName"].ToString();
+            //    string ServerName   = dr["ServerName"].ToString();
+            //    cboInstances.Items.Add(ServerName + '\\' + InstanceName);
+            //}
+
+            DataTable dataTable = SmoApplication.EnumAvailableSqlServers(true);
             cboInstances.Items.Clear();
-            foreach (DataRow dr in dt.Rows)
-            {
-                string InstanceName = dr["InstanceName"].ToString();
-                string ServerName   = dr["ServerName"].ToString();
+            foreach (DataRow dataRow in dataTable.Rows) {
+                string InstanceName = dataRow["Instance"].ToString();
+                string ServerName = dataRow["Server"].ToString();
                 cboInstances.Items.Add(ServerName + '\\' + InstanceName);
             }
+
+            //cboInstances.Items.Clear();
+            //  From http://stackoverflow.com/questions/5301021/how-to-list-the-sql-server-instances-installed-on-a-local-machine-only-local
+            //RegistryKey localMachineRegistry = RegistryKey.OpenSubKey(@"HKLM\Software\Microsoft\Microsoft SQL Server\Instance Names\SQL", false);
+            //OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            //RegistryKey instanceKey = Registry.LocalMachine.OpenSubKey(@"Software\Wow6432Node\Microsoft\Microsoft SQL Server\Instance Names", false);
+            //if (instanceKey != null)
+            //{
+            //    foreach (var instanceName in instanceKey.GetValueNames()) {
+            //        cboInstances.Items.Add(Environment.MachineName + @"\" + instanceName);
+            //    }
+            //}
+
             if (cboInstances.Items.Count > 0)
             {
                 txtSqlAddress.Text = (string)cboInstances.Items[0];
                 cboInstances.SelectedIndex = 0;
                 btnSet_Click(sender, e);
+            } else {
+                txtSqlAddress.Text = Environment.MachineName + @"\";
             }
             cboWhatToCopy.SelectedIndex = 0;
         }
@@ -230,11 +257,7 @@ namespace Converter
                 }
                 using (SqlConnection conn = new SqlConnection(constr)) {
                     conn.Open();
-                    //  This command forces connections to close. I gave up trying to work out how to close the connection cleanly.
-                    //SqlCommand query = new SqlCommand(@"ALTER DATABASE SqlConverter SET SINGLE_USER WITH ROLLBACK IMMEDIATE", conn);
-                    //query.ExecuteNonQuery();
-                    SqlCommand query = new SqlCommand(@"DROP DATABASE SqlConverter", conn);
-                    //SqlCommand query = new SqlCommand(@"EXEC sp_detach_db SqlConverter", conn);
+                    SqlCommand query = new SqlCommand(@"EXEC sp_detach_db SqlConverter", conn);
                     query.ExecuteNonQuery();
                 }
             }
@@ -246,7 +269,16 @@ namespace Converter
             string SqlServerPath = string.Empty;
             string sqlConnString;
             string dbname;
-            DirectoryInfo tempDir = new DirectoryInfo(tempDirPath);
+
+            string tempDirPath = Path.GetTempPath() + @"\SqlConverter";
+            if (Directory.Exists(tempDirPath)) {
+                Directory.Delete(tempDirPath, true);
+            }
+            System.IO.Directory.CreateDirectory(tempDirPath);
+            DirectoryInfo tempDirInfo = new DirectoryInfo(tempDirPath);
+            DirectorySecurity tempDirSecurity = tempDirInfo.GetAccessControl();
+            tempDirSecurity.AddAccessRule(new FileSystemAccessRule("everyone", FileSystemRights.FullControl, AccessControlType.Allow));
+            tempDirInfo.SetAccessControl(tempDirSecurity);
 
             if (txtSqlServerPath.Text != string.Empty) {
                 SqlServerPath = Path.GetFullPath(txtSqlServerPath.Text);
@@ -256,8 +288,6 @@ namespace Converter
                 }
 
                 tempFilePath = Path.GetFullPath(tempDirPath + @"\" + Path.GetFileName(txtSqlServerPath.Text));
-                foreach (var file in tempDir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
-                    file.Delete();
 
                 System.IO.File.Copy(SqlServerPath, tempFilePath);
 
@@ -311,16 +341,14 @@ namespace Converter
 
                         if (done)
                         {
-                            dropSqlConverterDatabase();
-
+                            if (txtSqlServerPath.Text != string.Empty) {
+                                dropSqlConverterDatabase();
+                                Directory.Delete(tempDirPath, true);
+                            }
                             btnSqlServerSQLite.Enabled = true;
                             this.Cursor = Cursors.Default;
                             UpdateSensitivity();
 
-                            if (txtSqlServerPath.Text != string.Empty) {
-                                foreach (var file in tempDir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
-                                    file.Delete();
-                            }
                             if (success)
                             {
                                 MessageBox.Show(this,
@@ -398,7 +426,16 @@ namespace Converter
             string SqlServerPath = string.Empty;
             string sqlConnString;
             string dbname;
-            DirectoryInfo tempDir = new DirectoryInfo(tempDirPath);
+
+            string tempDirPath = Path.GetTempPath() + @"\SqlConverter";
+            if (Directory.Exists(tempDirPath)) {
+                Directory.Delete(tempDirPath, true);
+            }
+            System.IO.Directory.CreateDirectory(tempDirPath);
+            DirectoryInfo tempDirInfo = new DirectoryInfo(tempDirPath);
+            DirectorySecurity tempDirSecurity = tempDirInfo.GetAccessControl();
+            tempDirSecurity.AddAccessRule(new FileSystemAccessRule("everyone", FileSystemRights.FullControl, AccessControlType.Allow));
+            tempDirInfo.SetAccessControl(tempDirSecurity);
 
             string SQLitePath = Path.GetFullPath(txtSQLitePath.Text);
             if (!File.Exists(SQLitePath)) {
@@ -409,8 +446,6 @@ namespace Converter
             if (txtSqlServerPath.Text != string.Empty)
             {
                 tempFilePath = Path.GetFullPath(tempDirPath + @"\" + Path.GetFileName(txtSqlServerPath.Text));
-                foreach (var file in tempDir.GetFiles(Path.GetFileNameWithoutExtension(txtSqlServerPath.Text) + "*"))
-                    file.Delete();
 
                 SqlServerPath = Path.GetFullPath(txtSqlServerPath.Text);
                 if (cboWhatToCopy.SelectedIndex == 2) {     //  ie if we are copying into an existing database
@@ -471,11 +506,15 @@ namespace Converter
 
                     if (done)
                     {
+                        if (txtSqlServerPath.Text != string.Empty) {
+                            dropSqlConverterDatabase();
+                            if (success) {
+                                System.IO.File.Copy(tempFilePath, SqlServerPath, true);
+                            }
+                            Directory.Delete(tempDirPath, true);
+                        }
                         if (success)
                         {
-                            if (txtSqlServerPath.Text != string.Empty) {
-                                //System.IO.File.Copy(tempFilePath, SqlServerPath, true);
-                            }
                             MessageBox.Show(this,
                                 msg,
                                 "Conversion Finished",
@@ -499,8 +538,6 @@ namespace Converter
                             else
                                 Application.Exit();
                         }
-                        dropSqlConverterDatabase();
-
                         btnSQLiteSqlServer.Enabled = true;
                         this.Cursor = Cursors.Default;
                         UpdateSensitivity();
