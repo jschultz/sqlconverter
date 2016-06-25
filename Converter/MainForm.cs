@@ -280,6 +280,20 @@ namespace Converter
             tempDirSecurity.AddAccessRule(new FileSystemAccessRule("everyone", FileSystemRights.FullControl, AccessControlType.Allow));
             tempDirInfo.SetAccessControl(tempDirSecurity);
 
+            string SQLitePath = Path.GetFullPath(txtSQLitePath.Text);
+            if (cboWhatToCopy.SelectedIndex == 2) {     //  ie if we are copying into an existing database
+                if (!File.Exists(SQLitePath)) {
+                    MessageBox.Show("Output file '" + SQLitePath + "' not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            } else {
+                if (File.Exists(SQLitePath)) {
+                    DialogResult result = MessageBox.Show("Replace existing file '" + SQLitePath + "'?", "Confirm replace file", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result != DialogResult.OK)
+                        return;
+                }
+            }
+
             if (txtSqlServerPath.Text != string.Empty) {
                 SqlServerPath = Path.GetFullPath(txtSqlServerPath.Text);
                 if (! File.Exists(SqlServerPath)) {
@@ -309,21 +323,6 @@ namespace Converter
             }
             else
                 dbname = (string)cboDatabases.SelectedItem;
-
-            string SQLitePath = Path.GetFullPath(txtSQLitePath.Text);
-            if (cboWhatToCopy.SelectedIndex == 2) {     //  ie if we are copying into an existing database
-                if (!File.Exists(SQLitePath)) {
-                    MessageBox.Show("Output file '" + SQLitePath + "' not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else {
-                if (File.Exists(SQLitePath)) {
-                    DialogResult result = MessageBox.Show("Replace existing file '" + SQLitePath + "'?", "Confirm replace file", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    if (result != DialogResult.OK)
-                        return;
-                }
-            }
 
             if (cbxIntegrated.Checked) {
                 sqlConnString = GetSqlServerConnectionString(txtSqlAddress.Text, dbname);

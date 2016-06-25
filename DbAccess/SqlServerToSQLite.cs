@@ -427,7 +427,7 @@ namespace DbAccess
                 return DbType.DateTime;
             if (cs.ColumnType == "nchar" || cs.ColumnType == "char")
                 return DbType.String;
-            if (cs.ColumnType == "uniqueidentifier" || cs.ColumnType == "guid")
+            if (cs.ColumnType == "uniqueidentifier" || cs.ColumnType == "guid" || cs.ColumnType == "uuid" || cs.ColumnType == "uuidtext")
                 //return DbType.Guid;
                 return DbType.String;
             if (cs.ColumnType == "xml")
@@ -987,8 +987,9 @@ namespace DbAccess
                         dataType = "blob";
                     else if (dataType == "xml")
                         dataType = "varchar";
-//                    else if (dataType == "uniqueidentifier")
-//                        dataType = "guid";
+                    else if (dataType == "uniqueidentifier")
+                        //dataType = "uuid";
+                        dataType = "uuidtext";
                     else if (dataType == "ntext")
                         dataType = "text";
                     else if (dataType == "nchar")

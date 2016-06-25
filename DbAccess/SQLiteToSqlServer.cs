@@ -418,7 +418,7 @@ namespace DbAccess
                 return SqlDbType.DateTime;
             if (cs.ColumnType == "nchar" || cs.ColumnType == "char")
                 return SqlDbType.Text;
-            if (cs.ColumnType == "uniqueidentifier" || cs.ColumnType == "guid")
+            if (cs.ColumnType == "uniqueidentifier" || cs.ColumnType == "guid" || cs.ColumnType == "uuid" || cs.ColumnType == "uuidtext")
                 return SqlDbType.UniqueIdentifier ;
             if (cs.ColumnType == "xml")
                 return SqlDbType.Xml;
